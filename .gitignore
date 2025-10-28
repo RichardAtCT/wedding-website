@@ -36,6 +36,7 @@ typings/
 .env
 .sass-cache/
 *.css.map
+psd/instagram.psd
 
 # Note: js/config.js IS committed (safe with restricted API keys)
 # If you need local overrides, create js/config.local.js
