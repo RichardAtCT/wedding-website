@@ -36,3 +36,6 @@ typings/
 .env
 .sass-cache/
 *.css.map
+
+# Configuration files with API keys
+js/config.js
