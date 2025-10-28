@@ -37,5 +37,6 @@ typings/
 .sass-cache/
 *.css.map
 
-# Configuration files with API keys
-js/config.js
+# Note: js/config.js IS committed (safe with restricted API keys)
+# If you need local overrides, create js/config.local.js
+js/config.local.js
