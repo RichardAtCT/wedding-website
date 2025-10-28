@@ -15,11 +15,48 @@ _See [wedding.rampatra.com](http://wedding.rampatra.com/) for a demo. Use invite
    data.
 
 # Getting Started
+
+## Quick Start (Local Development)
 1. `$ git clone https://github.com/rampatra/wedding-website.git` - clone this project to your computer
 2. `$ cd wedding-website` - go inside the project directory
 3. `$ npm install` - install dependencies
-4. `$ gulp` - compile sass to css, minify js, etc.
+4. `$ npm run build` - compile sass to css, minify js, etc.
 5. That's it, open `index.html` file on your browser by just double-clicking on it.
+
+## API Key Configuration
+
+The website uses API keys for Google Maps, Google Analytics, and Uber integration. These are configured in `js/config.js`.
+
+**For your own deployment:**
+
+1. **Get a Google Maps API Key:**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/google/maps-apis/credentials)
+   - Create an API key
+   - **IMPORTANT:** Restrict the key to your domain(s) under "HTTP referrers"
+   - Enable only "Maps JavaScript API"
+
+2. **Get a Google Analytics 4 Measurement ID:**
+   - Create a GA4 property at [Google Analytics](https://analytics.google.com/)
+   - Copy your Measurement ID (format: G-XXXXXXXXXX)
+
+3. **Update `js/config.js`:**
+   ```javascript
+   const CONFIG = {
+       GOOGLE_MAPS_API_KEY: 'YOUR_RESTRICTED_API_KEY',
+       GA4_MEASUREMENT_ID: 'G-XXXXXXXXXX',
+       UBER_CLIENT_ID: 'YOUR_UBER_CLIENT_ID', // optional
+       RSVP: {
+           FORM_ACTION_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL'
+       }
+   };
+   ```
+
+4. **Deploy to GitHub Pages:**
+   - Push your changes to your repository
+   - Enable GitHub Pages in repository settings
+   - See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions
+
+**Note:** The API keys in this repository are examples. While they are safe to commit when properly restricted (see [SECURITY.md](SECURITY.md)), you should replace them with your own keys for production use.
 
 # Documentation
 I have written a 
