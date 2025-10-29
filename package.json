@@ -24,13 +24,14 @@
     "gulp": "^5.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
+    "gulp-terser": "^2.1.0",
     "gulp-uglify": "^3.0.2",
     "sass": "^1.80.0"
   },
   "dependencies": {
-    "animate.css": "^4.1.1",
     "@fortawesome/fontawesome-free": "^6.7.0",
-    "jquery": "^3.7.1",
-    "waypoints": "^4.0.1"
+    "animate.css": "^4.1.1",
+    "bootstrap": "^5.3.3",
+    "jquery": "^3.7.1"
   }
 }
