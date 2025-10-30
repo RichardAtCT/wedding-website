@@ -1,7 +1,22 @@
 # Wedding Website
 
-A beautiful, feature rich, device friendly wedding website.  
+A beautiful, feature rich, device friendly wedding website.
 _See [wedding.rampatra.com](http://wedding.rampatra.com/) for a demo. Use invite code `271117` to RSVP._
+
+## ⚡ Modern Stack (2025 Update)
+
+This website has been modernized to 2025 standards with:
+
+- **Bootstrap 5.3.3** - Latest Bootstrap with modern grid system
+- **ES6+ JavaScript** - Modern JavaScript with native browser APIs
+- **Performance Optimized** - Lazy loading, resource hints, and deferred scripts
+- **Zero Vulnerabilities** - All dependencies updated and secured
+- **Native APIs** - IntersectionObserver replaces jQuery plugins
+- **Google Analytics 4** - Latest analytics platform
+- **Vite Build System** - Modern development experience with HMR
+- **Code Quality Tools** - ESLint, Prettier, Husky, and GitHub Actions CI/CD
+
+[View full modernization plan](MODERNIZATION_PLAN.md) | **Status:** Phase 1 ✅ Phase 2 ✅ Phase 3 ✅ Phase 4 ✅
 
 # Highlights
 
@@ -16,25 +31,76 @@ _See [wedding.rampatra.com](http://wedding.rampatra.com/) for a demo. Use invite
    [GitHub Pages](https://pages.github.com/) to host and Google sheets (with the help of Google scripts) to store RSVP
    data.
 
+# Technology Stack
+
+**Frontend:**
+
+- Bootstrap 5.3.3 (responsive grid, modals, utilities)
+- jQuery 3.7.1 (minimal usage, transitioning to vanilla JS)
+- Animate.css 4.1.1 (CSS animations)
+- Font Awesome 6.7.0 (icons)
+
+**Build Tools:**
+
+- Vite 7.x (modern dev server with HMR)
+- Sass 1.80.0 (CSS preprocessing)
+- Terser (ES6+ JavaScript minification)
+- Gulp 5.0.0 (legacy support)
+
+**Code Quality:**
+
+- ESLint 9.x (JavaScript linting)
+- Prettier 3.x (code formatting)
+- Husky (git hooks)
+- lint-staged (pre-commit checks)
+- GitHub Actions (CI/CD pipeline)
+
+**APIs & Services:**
+
+- Google Maps API (venue location)
+- Google Analytics 4 (web analytics)
+- YouTube API (video embedding)
+- Google Sheets (RSVP data storage)
+
+**Performance:**
+
+- Native IntersectionObserver (lazy loading)
+- Resource hints (preconnect, dns-prefetch)
+- Deferred script loading
+- Image lazy loading
+
 # Getting Started
 
 ## Quick Start (Local Development)
 
 1. `$ git clone https://github.com/rampatra/wedding-website.git` - clone this project to your computer
 2. `$ cd wedding-website` - go inside the project directory
-3. `$ npm install` - install dependencies
+3. `$ npm install` - install dependencies (0 vulnerabilities)
 4. `$ npm run dev` - start the development server with hot reload
 5. Open your browser to `http://localhost:3000` - the site will auto-reload on changes!
 
 ## Build Commands
 
-- **`npm run dev`** - Start Vite development server with hot module replacement
+**Development:**
+
+- **`npm run dev`** - Start Vite development server with hot module replacement (recommended)
+- **`npm run watch`** - Watch Sass files for changes during development (alternative)
+
+**Production:**
+
 - **`npm run build`** - Build production-ready assets (SASS, JS, and optimized bundle)
 - **`npm run build:sass`** - Compile SASS to minified CSS
 - **`npm run build:js`** - Minify JavaScript
 - **`npm run preview`** - Preview production build locally
+
+**Code Quality:**
+
 - **`npm run lint`** - Run ESLint and auto-fix issues
 - **`npm run format`** - Format code with Prettier
+- **`npm run format:check`** - Check code formatting
+
+**Legacy:**
+
 - **`npm run gulp`** - Run legacy Gulp build (deprecated)
 
 ## API Key Configuration
@@ -84,9 +150,26 @@ This project includes modern development tools for maintaining code quality:
 
 All code is automatically checked and formatted before commits. The CI/CD pipeline runs on every push and pull request.
 
+## Browser Support
+
+Modern browsers only (last 2 versions):
+
+- ✅ Chrome, Edge, Firefox, Safari
+- ✅ Mobile Safari (iOS), Chrome (Android)
+- ❌ Internet Explorer (no longer supported)
+
+All modern browser features used have 94%+ global support.
+
 # Documentation
 
-I have written a
+Comprehensive documentation is available:
+
+- **[MODERNIZATION_PLAN.md](MODERNIZATION_PLAN.md)** - Complete modernization roadmap and progress
+- **[UPGRADE_GUIDE.md](UPGRADE_GUIDE.md)** - Detailed changelog and migration guide
+- **[SECURITY.md](SECURITY.md)** - Security best practices and API key configuration
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - GitHub Pages and alternative hosting guides
+
+I have also written a
 [blog post describing all the features of this wedding website](https://blog.rampatra.com/wedding-website) and how to
 customize each of them according to your needs.
 

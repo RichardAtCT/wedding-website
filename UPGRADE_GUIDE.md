@@ -1,16 +1,161 @@
-# Upgrade Guide - Version 2.0.0
+# Upgrade Guide - Version 3.0.0
 
-## Phase 1: Critical Updates (COMPLETED)
+This guide documents the changes made during the modernization effort.
 
-This guide documents the changes made during Phase 1 of the modernization effort.
+## Summary of Changes
 
-### Summary of Changes
-
-Version 2.0.0 brings the wedding website up to 2025 security and compatibility standards with critical dependency updates, security enhancements, and removal of legacy browser support.
+**Version 2.0.0 (Phase 1):** Security and compatibility updates with modern dependencies
+**Version 2.1.0 (Phase 2):** Performance optimization with Bootstrap 5.3 and native browser APIs
+**Version 3.0.0 (Phase 4):** Architecture improvements with Vite, ESLint, Prettier, and CI/CD
 
 ---
 
-## Breaking Changes
+## Phase 4: Architecture Improvements (COMPLETED - v3.0.0)
+
+### Summary
+
+Version 3.0.0 introduces major architectural improvements including a modern build system (Vite), code quality tools (ESLint, Prettier), automated git hooks (Husky), and a comprehensive CI/CD pipeline (GitHub Actions).
+
+**New Features:**
+
+- **Vite 7.x** - Modern development server with Hot Module Replacement
+- **ESLint 9.x** - JavaScript linting with modern flat config
+- **Prettier 3.x** - Automated code formatting
+- **Husky 9.x** - Git hooks for pre-commit quality checks
+- **GitHub Actions** - Full CI/CD pipeline with automated testing and deployment
+
+**New npm Scripts:**
+
+- `npm run dev` - Start Vite dev server with HMR (port 3000)
+- `npm run lint` - Run ESLint and auto-fix issues
+- `npm run format` - Format all code with Prettier
+- `npm run format:check` - Check code formatting
+- `npm run preview` - Preview production build
+
+**Migration Impact:**
+
+- **Breaking:** `npm run watch` now uses Vite instead of Gulp (Gulp still available via `npm run gulp`)
+- **New:** Git pre-commit hooks automatically lint and format code
+- **New:** CI/CD pipeline runs on every push and pull request
+- **Enhanced:** Better developer experience with instant hot reload
+
+---
+
+## Phase 2: Performance Optimization (COMPLETED - v2.1.0)
+
+### Summary
+
+Version 2.1.0 focuses on performance optimization, upgrading to Bootstrap 5.3, and replacing jQuery plugins with native browser APIs.
+
+---
+
+## Phase 2 Breaking Changes
+
+### 1. Bootstrap (3.x → 5.3.3)
+
+**MAJOR BREAKING CHANGE:** Bootstrap completely rewritten
+
+**Critical HTML Changes Required:**
+
+```html
+<!-- Grid offsets -->
+Old:
+<div class="col-md-6 col-md-offset-3">
+  New:
+  <div class="col-md-6 offset-md-3">
+    <!-- Visibility utilities -->
+    Old:
+    <div class="hidden-xs hidden-sm">
+      New:
+      <div class="d-none d-md-block">
+        <!-- Modals -->
+        Old: data-toggle="modal" data-dismiss="modal" New: data-bs-toggle="modal"
+        data-bs-dismiss="modal"
+
+        <!-- Close buttons -->
+        Old: <button class="close"><span>&times;</span></button> New:
+        <button class="btn-close"></button>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+**CSS Changes:**
+
+- Bootstrap 3 CSS file completely replaced
+- Custom CSS compatibility layer added (in styles.scss)
+- Modal close button styling updated
+- Grid system uses modern flexbox
+
+**Migration:**
+All HTML has been updated in this release. If you have custom pages, update them to Bootstrap 5 syntax.
+
+### 2. Waypoints Library Removed
+
+**BREAKING:** Waypoints.js completely removed
+
+**Replacement:** Native IntersectionObserver API
+
+**Changes:**
+
+- Removed `waypoints` dependency from package.json
+- All scroll-triggered animations now use IntersectionObserver
+- Better performance with native API
+- No library overhead
+
+**Migration:**
+If you added custom waypoint triggers, convert them:
+
+```javascript
+// Old (Waypoints)
+$('.element').waypoint(
+  function () {
+    $('.element').addClass('animate');
+  },
+  { offset: '75%' }
+);
+
+// New (IntersectionObserver)
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate');
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { rootMargin: '-25% 0px' }
+);
+
+document.querySelectorAll('.element').forEach((el) => {
+  observer.observe(el);
+});
+```
+
+### 3. Build System (gulp-uglify → gulp-terser)
+
+**BREAKING:** ES6+ JavaScript required for minification
+
+**Changes:**
+
+- gulp-uglify removed (doesn't support ES6+)
+- gulp-terser added for modern JavaScript
+- Codebase now uses ES6+ syntax (const, arrow functions, etc.)
+
+**Impact:**
+
+- Minified JavaScript now supports modern syntax
+- Better code compression
+- Faster build times
+
+**Migration:**
+No action needed - build system automatically updated.
+
+---
+
+## Phase 1 Breaking Changes
 
 ### 1. jQuery Updated (1.11.2 → 3.7.1)
 
@@ -111,7 +256,38 @@ Now supports last 2 versions of:
 
 ---
 
-## New Features
+## Phase 2 New Features
+
+### 1. Performance Optimizations
+
+- **Lazy Loading:** All images below the fold use `loading="lazy"`
+- **Resource Hints:** Preconnect to Google Maps, YouTube, GA
+- **Deferred Scripts:** Non-critical JS deferred for faster page load
+- **Optimized Loading:** Critical CSS and JS preloaded
+
+### 2. Modern JavaScript APIs
+
+- **IntersectionObserver:** Native scroll-triggered animations
+- **Lazy YouTube:** Video player loads only when needed
+- **ES6+ Syntax:** const, arrow functions, template literals
+- **Smaller Bundle:** Removed Waypoints library dependency
+
+### 3. Bootstrap 5.3 Features
+
+- **Modern Grid:** Flexbox-based responsive grid
+- **Better Modals:** Improved accessibility and styling
+- **Utility Classes:** Comprehensive utility system
+- **Smaller CSS:** More efficient stylesheet
+
+### 4. Build Improvements
+
+- **ES6+ Support:** Full modern JavaScript support
+- **Terser Minification:** Better compression than UglifyJS
+- **Faster Builds:** Optimized build pipeline
+
+---
+
+## Phase 1 New Features
 
 ### 1. Enhanced Security
 
@@ -136,35 +312,94 @@ Now supports last 2 versions of:
 
 ## Dependency Updates
 
-### Before (v1.0.1)
+### v1.0.1 → v2.0.0 (Phase 1)
 
 ```json
 {
-  "animate.css": "^3.7.2",
-  "font-awesome": "^4.7.0",
-  "waypoints": "^4.0.1",
-  "gulp": "^4.0.2",
-  "sass": "^1.25.0"
+  // Updated
+  "animate.css": "^3.7.2" → "^4.1.1",
+  "font-awesome": "^4.7.0" → "@fortawesome/fontawesome-free": "^6.7.0",
+  "gulp": "^4.0.2" → "^5.0.0",
+  "sass": "^1.25.0" → "^1.80.0",
+
+  // Added
+  "jquery": "^3.7.1"
 }
 ```
 
-### After (v2.0.0)
+### v2.0.0 → v2.1.0 (Phase 2)
 
 ```json
 {
-  "animate.css": "^4.1.1",
-  "@fortawesome/fontawesome-free": "^6.7.0",
-  "jquery": "^3.7.1",
-  "waypoints": "^4.0.1",
-  "gulp": "^5.0.0",
-  "sass": "^1.80.0"
+  // Added
+  "bootstrap": "^5.3.3",
+  "gulp-terser": "^2.1.0",
+
+  // Removed
+  "waypoints": "^4.0.1" ❌ (replaced with native IntersectionObserver),
+  "gulp-uglify": "^3.0.2" ❌ (replaced with gulp-terser)
+}
+```
+
+### v2.1.0 → v3.0.0 (Phase 4)
+
+```json
+{
+  // Added
+  "@eslint/js": "^9.38.0",
+  "@vitejs/plugin-legacy": "^7.2.1",
+  "eslint": "^9.38.0",
+  "eslint-config-prettier": "^10.1.8",
+  "eslint-plugin-prettier": "^5.5.4",
+  "husky": "^9.1.7",
+  "lint-staged": "^16.2.6",
+  "prettier": "^3.6.2",
+  "terser": "^5.44.0",
+  "vite": "^7.1.12",
+  "vite-plugin-sass": "^0.1.0",
+  "vite-plugin-static-copy": "^3.1.4"
+}
+```
+
+### Current Dependencies (v3.0.0)
+
+```json
+{
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.0",
+    "animate.css": "^4.1.1",
+    "bootstrap": "^5.3.3",
+    "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "@vitejs/plugin-legacy": "^7.2.1",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "gulp": "^5.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-terser": "^2.1.0",
+    "gulp-uglify": "^3.0.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2",
+    "sass": "^1.80.0",
+    "terser": "^5.44.0",
+    "vite": "^7.1.12",
+    "vite-plugin-sass": "^0.1.0",
+    "vite-plugin-static-copy": "^3.1.4"
+  }
 }
 ```
 
 ### Security Status
 
-- **Before:** Multiple known vulnerabilities in jQuery 1.11.2
-- **After:** 0 known vulnerabilities (verified with `npm audit`)
+- **v1.0.1:** Multiple known vulnerabilities in jQuery 1.11.2
+- **v2.0.0:** 0 known vulnerabilities (verified with `npm audit`)
+- **v2.1.0:** 0 known vulnerabilities, 195 packages total
+- **v3.0.0:** 0 known vulnerabilities, 468 packages total
 
 ---
 
@@ -354,6 +589,59 @@ See `MODERNIZATION_PLAN.md` for full roadmap.
 
 ## Changelog
 
+### Version 2.1.0 (2025-10-29) - Phase 2 Complete
+
+**Added:**
+
+- Bootstrap 5.3.3 dependency
+- gulp-terser for ES6+ minification
+- Lazy loading for all images (`loading="lazy"`)
+- Resource hints (preconnect, dns-prefetch, preload)
+- IntersectionObserver for scroll animations
+- IntersectionObserver for lazy YouTube loading
+- Bootstrap 5 compatibility CSS
+- ES6+ JavaScript syntax throughout
+- Deferred script loading
+- Technology Stack section in README
+- Browser Support section in README
+
+**Updated:**
+
+- Bootstrap 3.x → 5.3.3 (major upgrade)
+- All HTML grid classes to Bootstrap 5 syntax
+- All HTML visibility utilities to Bootstrap 5 syntax
+- Modal components to Bootstrap 5 syntax
+- gulpfile.js to use terser instead of uglify
+- js/scripts.js with IntersectionObserver implementation
+- sass/styles.scss with Bootstrap 5 fixes
+- README.md with modern stack information
+- MODERNIZATION_PLAN.md marked Phase 2 complete
+- package.json version to 2.1.0
+
+**Removed:**
+
+- Waypoints library dependency (replaced with IntersectionObserver)
+- gulp-uglify (replaced with gulp-terser)
+- Waypoints CDN fallback code
+- All `psd/` design files from repository (~62MB)
+
+**Performance:**
+
+- Reduced initial JavaScript load (deferred scripts)
+- Faster DNS resolution (resource hints)
+- Reduced image loading impact (lazy loading)
+- Smoother animations (native API vs library)
+- Faster YouTube initialization (lazy loaded)
+- Smaller repository size (removed PSDs)
+
+**Build System:**
+
+- Now supports ES6+ JavaScript syntax
+- Terser provides better minification than UglifyJS
+- Faster build times with modern tools
+
+---
+
 ### Version 2.0.0 (2025-10-28) - Phase 1 Complete
 
 **Added:**
@@ -361,7 +649,8 @@ See `MODERNIZATION_PLAN.md` for full roadmap.
 - API key configuration system (config.js)
 - Security documentation (SECURITY.md)
 - Modernization plan (MODERNIZATION_PLAN.md)
-- This upgrade guide
+- Upgrade guide (UPGRADE_GUIDE.md)
+- Deployment documentation (DEPLOYMENT.md)
 
 **Updated:**
 
@@ -391,5 +680,6 @@ See `MODERNIZATION_PLAN.md` for full roadmap.
 
 ---
 
-Last Updated: 2025-10-28
-Phase: 1 of 5 Complete
+Last Updated: 2025-10-29
+Phase: 2 of 5 Complete
+Current Version: 2.1.0
