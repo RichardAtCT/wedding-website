@@ -5,9 +5,11 @@ This document outlines security measures and best practices for deploying the we
 ## API Key Management
 
 ### Configuration
+
 All API keys are stored in `js/config.js` which is excluded from version control.
 
 **Setup Instructions:**
+
 1. Copy `js/config.example.js` to `js/config.js`
 2. Replace placeholder values with your actual API keys
 3. Never commit `config.js` to version control (it's in `.gitignore`)
@@ -52,7 +54,9 @@ Content-Security-Policy:
 ### Implementation by Platform
 
 #### GitHub Pages
+
 Add to your repository's `_headers` file:
+
 ```
 /*
   Content-Security-Policy: [policy above]
@@ -63,6 +67,7 @@ Add to your repository's `_headers` file:
 ```
 
 #### Apache (.htaccess)
+
 ```apache
 <IfModule mod_headers.c>
     Header set Content-Security-Policy "[policy above]"
@@ -74,6 +79,7 @@ Add to your repository's `_headers` file:
 ```
 
 #### Nginx
+
 ```nginx
 add_header Content-Security-Policy "[policy above]";
 add_header X-Content-Type-Options "nosniff";
@@ -92,6 +98,7 @@ add_header Referrer-Policy "strict-origin-when-cross-origin";
 - Enable HSTS (HTTP Strict Transport Security)
 
 ### HSTS Header
+
 ```
 Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 ```
@@ -101,10 +108,13 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 For CDN resources, use SRI to ensure files haven't been tampered with.
 
 Example:
+
 ```html
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-        crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"
+></script>
 ```
 
 Generate SRI hashes: https://www.srihash.org/
@@ -112,12 +122,14 @@ Generate SRI hashes: https://www.srihash.org/
 ## Form Security
 
 ### RSVP Form
+
 - Uses POST method to Google Apps Script
 - Includes CSRF protection via invite code
 - Validates invite code using MD5 hash (consider upgrading to SHA-256)
 - Rate limiting recommended on backend
 
 ### Recommendations
+
 1. Implement rate limiting on the Google Apps Script endpoint
 2. Add honeypot field to prevent bot submissions
 3. Consider upgrading from MD5 to SHA-256 for invite code validation
@@ -126,19 +138,23 @@ Generate SRI hashes: https://www.srihash.org/
 ## Dependency Security
 
 ### Regular Updates
+
 ```bash
 npm audit
 npm audit fix
 ```
 
 ### Current Status (Phase 1 Complete)
+
 - jQuery: 3.7.1 (latest, no known vulnerabilities)
 - Font Awesome: 6.7.0 (latest)
 - animate.css: 4.1.1 (latest)
 - All dependencies updated to latest secure versions
 
 ### Automated Scanning
+
 Consider setting up:
+
 - Dependabot (GitHub)
 - Snyk
 - npm audit in CI/CD pipeline
@@ -146,12 +162,14 @@ Consider setting up:
 ## Privacy & GDPR Compliance
 
 ### Google Analytics 4
+
 - Anonymize IP addresses (enabled by default in GA4)
 - Cookie consent banner recommended
 - Privacy policy required
 - Data retention settings configured
 
 ### Recommendations
+
 1. Add cookie consent banner (e.g., using CookieConsent library)
 2. Create privacy policy page
 3. Configure GA4 data retention settings
@@ -160,22 +178,27 @@ Consider setting up:
 ## Additional Security Measures
 
 ### 1. Input Validation
+
 - All form inputs validated on client and server side
 - Email validation implemented
 - Number fields have min/max constraints
 
 ### 2. Cross-Origin Resource Sharing (CORS)
+
 - Configure Google Apps Script to accept requests only from your domain
 
 ### 3. Rate Limiting
+
 - Implement on RSVP form submission
 - Prevent brute force attacks on invite code
 
 ### 4. Error Handling
+
 - Don't expose sensitive information in error messages
 - Log errors securely on backend
 
 ### 5. Regular Monitoring
+
 - Monitor Google Apps Script logs
 - Set up alerts for unusual activity
 - Review access logs regularly

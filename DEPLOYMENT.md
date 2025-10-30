@@ -23,6 +23,7 @@ The API keys used in this project are **designed to be public** when properly re
 **Setup Steps:**
 
 1. **Configure Google Maps API Key:**
+
    ```
    Go to: https://console.cloud.google.com/google/maps-apis/credentials
 
@@ -44,6 +45,7 @@ The API keys used in this project are **designed to be public** when properly re
    Remove `js/config.js` from `.gitignore` OR create a separate `config.production.js`
 
 3. **Commit your config:**
+
    ```bash
    # Option 1: Commit config.js directly
    git rm --cached js/config.js
@@ -59,6 +61,7 @@ The API keys used in this project are **designed to be public** when properly re
    ```
 
 4. **Deploy to GitHub Pages:**
+
    ```bash
    git push origin main
 
@@ -70,6 +73,7 @@ The API keys used in this project are **designed to be public** when properly re
    ```
 
 **Why this is safe:**
+
 - Google Maps key is restricted to your domain only
 - Even if someone copies your key, it won't work on their domain
 - GA4 ID is meant to be public (everyone can see it in browser DevTools anyway)
@@ -82,6 +86,7 @@ For maximum security, use GitHub Actions to inject secrets during build.
 **Setup:**
 
 1. **Add secrets to GitHub:**
+
    ```
    Repository > Settings > Secrets and variables > Actions > New repository secret
 
@@ -92,12 +97,13 @@ For maximum security, use GitHub Actions to inject secrets during build.
    ```
 
 2. **Create `.github/workflows/deploy.yml`:**
+
    ```yaml
    name: Deploy to GitHub Pages
 
    on:
      push:
-       branches: [ main ]
+       branches: [main]
 
    jobs:
      build-and-deploy:
@@ -168,6 +174,7 @@ netlify deploy
 ```
 
 **netlify.toml:**
+
 ```toml
 [build]
   command = "npm run build"
@@ -204,6 +211,7 @@ vercel
 ### GitHub Pages with Custom Domain
 
 1. **Add CNAME file:**
+
    ```bash
    echo "yourdomain.com" > CNAME
    git add CNAME
@@ -214,6 +222,7 @@ vercel
 2. **Configure DNS:**
 
    **For apex domain (example.com):**
+
    ```
    Type: A
    Name: @
@@ -224,6 +233,7 @@ vercel
    ```
 
    **For subdomain (www.example.com):**
+
    ```
    Type: CNAME
    Name: www
@@ -244,6 +254,7 @@ vercel
 ## Pre-Deployment Checklist
 
 ### Configuration
+
 - [ ] API keys configured in config.js
 - [ ] Google Maps API key restricted to domain(s)
 - [ ] GA4 Measurement ID added
@@ -251,6 +262,7 @@ vercel
 - [ ] Custom domain configured (if using)
 
 ### Security
+
 - [ ] HTTPS enabled
 - [ ] API keys restricted by domain/referrer
 - [ ] Security headers configured (see SECURITY.md)
@@ -258,6 +270,7 @@ vercel
 - [ ] All external resources use HTTPS
 
 ### Testing
+
 - [ ] Build completes: `npm run build`
 - [ ] No console errors in browser
 - [ ] Google Map loads correctly
@@ -270,6 +283,7 @@ vercel
 - [ ] All navigation links work
 
 ### Performance
+
 - [ ] Images optimized
 - [ ] CSS/JS minified
 - [ ] No 404 errors
@@ -277,11 +291,13 @@ vercel
 - [ ] Page loads in < 3 seconds
 
 ### Analytics
+
 - [ ] GA4 tracking verified in Real-Time reports
 - [ ] Events fire correctly
 - [ ] No tracking errors in console
 
 ### Content
+
 - [ ] Update wedding details (dates, location, names)
 - [ ] Replace placeholder images
 - [ ] Update contact information
@@ -296,6 +312,7 @@ vercel
 If issues occur after deployment:
 
 ### GitHub Pages
+
 ```bash
 # Revert to previous commit
 git revert HEAD
@@ -307,6 +324,7 @@ git push -f origin main
 ```
 
 ### Using GitHub Releases
+
 ```bash
 # Tag stable versions
 git tag -a v2.0.0 -m "Version 2.0.0 - Production ready"
@@ -350,30 +368,35 @@ git push origin rollback
 ## Troubleshooting
 
 ### Map doesn't load
+
 - Check API key is correct in config.js
 - Verify API key restrictions include your domain
 - Check browser console for error messages
 - Ensure Maps JavaScript API is enabled
 
 ### RSVP form doesn't submit
+
 - Verify Google Apps Script URL is correct
 - Check CORS settings on Apps Script
 - Test invite code hash matches
 - Check browser console for errors
 
 ### Analytics not tracking
+
 - Verify GA4 Measurement ID format (G-XXXXXXXXXX)
 - Check if ad blockers are interfering
 - Wait 24-48 hours for data to appear
 - Check Real-Time reports for immediate verification
 
 ### 404 Errors
+
 - Ensure all file paths are relative
 - Check case sensitivity in file names
 - Verify all referenced files are committed
 - Clear browser cache
 
 ### HTTPS Certificate Issues
+
 - Wait 24 hours after enabling custom domain
 - Check DNS propagation: https://dnschecker.org
 - Verify CNAME file is in repository
@@ -386,6 +409,7 @@ git push origin rollback
 ### Before Going Live
 
 1. **Minify all assets:**
+
    ```bash
    npm run build
    ```
