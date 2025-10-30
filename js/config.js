@@ -16,22 +16,22 @@
  */
 
 const CONFIG = {
-    // Google Maps API Key
-    GOOGLE_MAPS_API_KEY: 'AIzaSyBlPw3GQYI3faa_9mRE6plWuM7xNEmrwH0',
+  // Google Maps API Key
+  GOOGLE_MAPS_API_KEY: 'AIzaSyBlPw3GQYI3faa_9mRE6plWuM7xNEmrwH0',
 
-    // Google Analytics 4 Measurement ID
-    GA4_MEASUREMENT_ID: 'G-XXXXXXXXXX',
+  // Google Analytics 4 Measurement ID
+  GA4_MEASUREMENT_ID: 'G-XXXXXXXXXX',
 
-    // Uber API Client ID
-    UBER_CLIENT_ID: 'Yh7Dl6SjB56RY2JuuZF8ttVa6ryFV78W',
+  // Uber API Client ID
+  UBER_CLIENT_ID: 'Yh7Dl6SjB56RY2JuuZF8ttVa6ryFV78W',
 
-    // RSVP Form Configuration
-    RSVP: {
-        FORM_ACTION_URL: ''
-    }
+  // RSVP Form Configuration
+  RSVP: {
+    FORM_ACTION_URL: '',
+  },
 };
 
 // Make config available globally
 if (typeof window !== 'undefined') {
-    window.CONFIG = CONFIG;
+  window.CONFIG = CONFIG;
 }
