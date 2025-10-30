@@ -194,32 +194,54 @@ $(document).ready(function () {
   });
 
   /********************** Add to Calendar **********************/
+  // Use wedding data if available, otherwise fall back to defaults
+  const calendarData =
+    typeof WEDDING_DATA !== 'undefined'
+      ? WEDDING_DATA.calendar
+      : {
+          title: 'Our Wedding',
+          startDate: '20171127T100000',
+          endDate: '20171129T000000',
+          location: 'Wedding Venue',
+          description: 'Join us for our wedding celebration!',
+        };
+
+  const venueData =
+    typeof WEDDING_DATA !== 'undefined'
+      ? WEDDING_DATA.venue
+      : {
+          name: 'Wedding Venue',
+          contact: { name: 'Contact', phones: ['+1 234-567-8900'] },
+        };
+
+  // Convert calendar date format (YYYYMMDDTHHMMSS) to Date object
+  function parseCalendarDate(dateStr) {
+    if (!dateStr) return new Date();
+    const year = parseInt(dateStr.substring(0, 4));
+    const month = parseInt(dateStr.substring(4, 6)) - 1; // JS months are 0-indexed
+    const day = parseInt(dateStr.substring(6, 8));
+    const hour = parseInt(dateStr.substring(9, 11)) || 0;
+    const minute = parseInt(dateStr.substring(11, 13)) || 0;
+    return new Date(year, month, day, hour, minute);
+  }
+
   const myCalendar = createCalendar({
     options: {
       class: '',
-      // You can pass an ID. If you don't, one will be generated for you
       id: '',
     },
     data: {
-      // Event title
-      title: "Ram and Antara's Wedding",
-
-      // Event start date
-      start: new Date('Nov 27, 2017 10:00'),
-
-      // Event duration (IN MINUTES)
-      // duration: 120,
-
-      // You can also choose to set an end time
-      // If an end time is set, this will take precedence over duration
-      end: new Date('Nov 29, 2017 00:00'),
-
-      // Event Address
-      address: 'ITC Fortune Park Hotel, Kolkata',
-
-      // Event Description
+      title: calendarData.title,
+      start: parseCalendarDate(calendarData.startDate),
+      end: parseCalendarDate(calendarData.endDate),
+      address: calendarData.location,
       description:
-        "We can't wait to see you on our big day. For any queries or issues, please contact Mr. Amit Roy at +91 9876543210.",
+        calendarData.description ||
+        "We can't wait to see you on our big day. For any queries or issues, please contact " +
+          venueData.contact.name +
+          ' at ' +
+          venueData.contact.phones[0] +
+          '.',
     },
   });
 
@@ -234,18 +256,31 @@ $(document).ready(function () {
       alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.')
     );
 
-    if (
-      MD5($('#invite_code').val()) !== 'b0e53b10c1f55ede516b240036b88f40' &&
-      MD5($('#invite_code').val()) !== '2ac7f43695eb0479d5846bb38eec59cc'
-    ) {
+    // Get RSVP configuration from wedding data
+    const rsvpConfig =
+      typeof WEDDING_DATA !== 'undefined'
+        ? WEDDING_DATA.rsvp
+        : {
+            inviteCodeHashes: [
+              'b0e53b10c1f55ede516b240036b88f40',
+              '2ac7f43695eb0479d5846bb38eec59cc',
+            ],
+            formActionUrl:
+              'https://script.google.com/macros/s/AKfycbyo0rEknln8LedEP3bkONsfOh776IR5lFidLhJFQ6jdvRiH4dKvHZmtoIybvnxpxYr2cA/exec',
+          };
+
+    // Validate invite code against all configured hashes
+    const inviteCodeHash = MD5($('#invite_code').val());
+    const isValidCode = rsvpConfig.inviteCodeHashes.some(function (hash) {
+      return inviteCodeHash === hash;
+    });
+
+    if (!isValidCode) {
       $('#alert-wrapper').html(
         alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.')
       );
     } else {
-      $.post(
-        'https://script.google.com/macros/s/AKfycbyo0rEknln8LedEP3bkONsfOh776IR5lFidLhJFQ6jdvRiH4dKvHZmtoIybvnxpxYr2cA/exec',
-        data
-      )
+      $.post(rsvpConfig.formActionUrl, data)
         .done(function (data) {
           console.log(data);
           if (data.result === 'error') {
@@ -267,16 +302,25 @@ $(document).ready(function () {
 
 /********************** Extras **********************/
 
+/* exported initMap, initBBSRMap */
+// These functions are called by Google Maps API callback
+
 // Google map
 function initMap() {
-  const location = { lat: 22.5932759, lng: 88.27027720000001 };
+  // Get venue coordinates from wedding data
+  const venueData = typeof WEDDING_DATA !== 'undefined' ? WEDDING_DATA.venue : null;
+  const location = venueData
+    ? { lat: venueData.coordinates.lat, lng: venueData.coordinates.lng }
+    : { lat: 22.5932759, lng: 88.27027720000001 };
+
   const map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 15,
     center: location,
     scrollwheel: false,
   });
 
-  const marker = new google.maps.Marker({
+  // Add marker to map
+  new google.maps.Marker({
     position: location,
     map: map,
   });
@@ -290,7 +334,8 @@ function initBBSRMap() {
     scrollwheel: false,
   });
 
-  const marker = new google.maps.Marker({
+  // Add marker to map
+  new google.maps.Marker({
     position: la_fiesta,
     map: map,
   });
@@ -308,18 +353,17 @@ function alert_markup(alert_type, msg) {
 }
 
 // MD5 Encoding
-var MD5 = function (string) {
+const MD5 = function (string) {
   function RotateLeft(lValue, iShiftBits) {
     return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
   }
 
   function AddUnsigned(lX, lY) {
-    let lX4, lY4, lX8, lY8, lResult;
-    lX8 = lX & 0x80000000;
-    lY8 = lY & 0x80000000;
-    lX4 = lX & 0x40000000;
-    lY4 = lY & 0x40000000;
-    lResult = (lX & 0x3fffffff) + (lY & 0x3fffffff);
+    const lX8 = lX & 0x80000000;
+    const lY8 = lY & 0x80000000;
+    const lX4 = lX & 0x40000000;
+    const lY4 = lY & 0x40000000;
+    const lResult = (lX & 0x3fffffff) + (lY & 0x3fffffff);
     if (lX4 & lY4) {
       return lResult ^ 0x80000000 ^ lX8 ^ lY8;
     }

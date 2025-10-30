@@ -37,6 +37,14 @@ export default [
         loadCssFromCDN: 'readonly',
         loadJsFromCDN: 'readonly',
         createCalendar: 'readonly',
+        // Wedding data configuration
+        WEDDING_DATA: 'readonly',
+        CONFIG: 'readonly',
+        // MD5 library
+        MD5: 'readonly',
+        // Map initialization functions (called by Google Maps callback)
+        initMap: 'readonly',
+        initBBSRMap: 'readonly',
       },
     },
     plugins: {
@@ -44,7 +52,13 @@ export default [
     },
     rules: {
       'prettier/prettier': 'error',
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^(init|alert_|MD5)', // Ignore callback functions and utilities
+        },
+      ],
       'no-console': 'off', // Allow console for this project
       'no-undef': 'error',
       'prefer-const': 'warn',
@@ -63,6 +77,15 @@ export default [
         require: 'readonly',
         exports: 'readonly',
         Buffer: 'readonly',
+      },
+    },
+  },
+  {
+    files: ['js/wedding-data.js', 'js/wedding-data.example.js'],
+    languageOptions: {
+      globals: {
+        // Allow CommonJS module exports for wedding data
+        module: 'readonly',
       },
     },
   },
