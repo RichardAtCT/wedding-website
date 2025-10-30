@@ -1,51 +1,42 @@
 $(document).ready(function () {
 
-    /***************** Waypoints ******************/
+    /***************** Intersection Observer for Animations ******************/
+    // Modern replacement for Waypoints using native IntersectionObserver API
 
-    $('.wp1').waypoint(function () {
-        $('.wp1').addClass('animated fadeInLeft');
+    // Animation configuration: [selector, animationClass]
+    const animations = [
+        ['.wp1', 'animated fadeInLeft'],
+        ['.wp2', 'animated fadeInRight'],
+        ['.wp3', 'animated fadeInLeft'],
+        ['.wp4', 'animated fadeInRight'],
+        ['.wp5', 'animated fadeInLeft'],
+        ['.wp6', 'animated fadeInRight'],
+        ['.wp7', 'animated fadeInUp'],
+        ['.wp8', 'animated fadeInLeft'],
+        ['.wp9', 'animated fadeInRight']
+    ];
+
+    // Create IntersectionObserver with 25% threshold (equivalent to 75% offset in Waypoints)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const animationClasses = entry.target.dataset.animation;
+                entry.target.classList.add(...animationClasses.split(' '));
+                observer.unobserve(entry.target); // Trigger once
+            }
+        });
     }, {
-        offset: '75%'
+        threshold: 0,
+        rootMargin: '-25% 0px' // Equivalent to 75% offset
     });
-    $('.wp2').waypoint(function () {
-        $('.wp2').addClass('animated fadeInRight');
-    }, {
-        offset: '75%'
-    });
-    $('.wp3').waypoint(function () {
-        $('.wp3').addClass('animated fadeInLeft');
-    }, {
-        offset: '75%'
-    });
-    $('.wp4').waypoint(function () {
-        $('.wp4').addClass('animated fadeInRight');
-    }, {
-        offset: '75%'
-    });
-    $('.wp5').waypoint(function () {
-        $('.wp5').addClass('animated fadeInLeft');
-    }, {
-        offset: '75%'
-    });
-    $('.wp6').waypoint(function () {
-        $('.wp6').addClass('animated fadeInRight');
-    }, {
-        offset: '75%'
-    });
-    $('.wp7').waypoint(function () {
-        $('.wp7').addClass('animated fadeInUp');
-    }, {
-        offset: '75%'
-    });
-    $('.wp8').waypoint(function () {
-        $('.wp8').addClass('animated fadeInLeft');
-    }, {
-        offset: '75%'
-    });
-    $('.wp9').waypoint(function () {
-        $('.wp9').addClass('animated fadeInRight');
-    }, {
-        offset: '75%'
+
+    // Observe all elements
+    animations.forEach(([selector, animationClass]) => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element => {
+            element.dataset.animation = animationClass;
+            observer.observe(element);
+        });
     });
 
     /***************** Initiate Flexslider ******************/
@@ -161,8 +152,24 @@ $(document).ready(function () {
         share_bar[i].style.display = 'inline-block';
     }
 
-    /********************** Embed youtube video *********************/
-    $('.player').YTPlayer();
+    /********************** Lazy Load YouTube Video *********************/
+    // Use IntersectionObserver to load YouTube video only when it comes into view
+    const videoSection = document.getElementById('video-bg');
+    if (videoSection) {
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Load and initialize YouTube player when section is visible
+                    $('.player').YTPlayer();
+                    videoObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '200px' // Start loading 200px before it comes into view
+        });
+
+        videoObserver.observe(videoSection);
+    }
 
 
     /********************** Toggle Map Content **********************/
