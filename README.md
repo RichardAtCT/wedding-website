@@ -1,366 +1,494 @@
-# Wedding Website
-A beautiful, feature rich, device friendly wedding website.
-_See [wedding.rampatra.com](http://wedding.rampatra.com/) for a demo. Use invite code `271117` to RSVP._
+# Wedding Website Template
 
-## ⚡ Modern Stack (2025 Update)
+**A beautiful, modern, and fully customizable wedding website template that you can personalize in minutes.**
 
-This website has been modernized to 2025 standards with:
-- **Bootstrap 5.3.3** - Latest Bootstrap with modern grid system
-- **ES6+ JavaScript** - Modern JavaScript with native browser APIs
-- **Performance Optimized** - Lazy loading, resource hints, and deferred scripts
-- **Zero Vulnerabilities** - All dependencies updated and secured
-- **Native APIs** - IntersectionObserver replaces jQuery plugins
-- **Google Analytics 4** - Latest analytics platform
+This is a complete rewrite and template-focused fork of the original [wedding-website by rampatra](https://github.com/rampatra/wedding-website). All personal content has been centralized into easy-to-edit configuration files, making it simple for anyone to create their own beautiful wedding website.
 
-[View full modernization plan](MODERNIZATION_PLAN.md) | **Status:** Phase 1 ✅ Phase 2 ✅
+[![Deploy to GitHub Pages](https://img.shields.io/badge/deploy-github%20pages-blue)](https://pages.github.com/)
+[![Modern Stack](https://img.shields.io/badge/bootstrap-5.3.3-purple)](https://getbootstrap.com/)
+[![Zero Vulnerabilities](https://img.shields.io/badge/vulnerabilities-0-brightgreen)](https://www.npmjs.com/)
 
-# Highlights
-1. Slick and fully __responsive__ design.
-2. __RSVP feature__ which directly uploads data to a Google sheet.
-3. __Receive email alerts__ when someone RSVPs.
-4. __Add to Calendar__ feature which supports four different calendars.
-5. __Book Uber__ button lets guests book a cab to the venue with just a single tap.
-6. A nice __Youtube video__ showing your venue.
-7. __Google Map__ showing your venue's location.
-8. Start and run the website __completely free__. No hosting, backend server, or database required as you can use
-   [GitHub Pages](https://pages.github.com/) to host and Google sheets (with the help of Google scripts) to store RSVP
-   data.
+## 🎉 Why This Template?
 
-# Technology Stack
+- **⚡ 15-Minute Setup** - Get your wedding website running in under 15 minutes
+- **🎨 Fully Customizable** - Edit one configuration file to personalize everything
+- **🤖 AI-Friendly** - Includes comprehensive LLM instructions for AI-assisted customization
+- **📱 Responsive Design** - Looks stunning on all devices
+- **🆓 Completely Free** - Host on GitHub Pages at no cost
+- **🔧 Modern Tech Stack** - Built with Bootstrap 5.3.3, ES6+, and modern browser APIs
+- **♿ Accessible** - WCAG AA compliant with proper ARIA labels
+- **🚀 PWA Ready** - Progressive Web App support for offline access
 
-**Frontend:**
-- Bootstrap 5.3.3 (responsive grid, modals, utilities)
-- jQuery 3.7.1 (minimal usage, transitioning to vanilla JS)
-- Animate.css 4.1.1 (CSS animations)
-- Font Awesome 6.7.0 (icons)
+## 🌟 Features
 
-**Build Tools:**
-- Gulp 5.0.0 (task runner)
-- Sass 1.80.0 (CSS preprocessing)
-- Terser (ES6+ JavaScript minification)
+### Guest Experience
+- ✅ **Beautiful Hero Section** with your photo and logo
+- ✅ **Multiple Events Support** - Ceremony, reception, rehearsal dinner, etc.
+- ✅ **Interactive Map** with venue location and Uber integration
+- ✅ **RSVP Form** with invite code validation (saves to Google Sheets)
+- ✅ **Add to Calendar** for Apple, Google, Outlook, and Yahoo calendars
+- ✅ **Photo Gallery** with lightbox for engagement photos
+- ✅ **Your Love Story** section
+- ✅ **Instagram Integration** with custom hashtag
+- ✅ **YouTube Video** to showcase your venue or memories
+- ✅ **Dress Code Information** with modal for each event
 
-**APIs & Services:**
-- Google Maps API (venue location)
-- Google Analytics 4 (web analytics)
-- YouTube API (video embedding)
-- Google Sheets (RSVP data storage)
+### Developer Experience
+- ✅ **Single Configuration File** - All content in `wedding-data.js`
+- ✅ **Template Files** - Example configs to get started quickly
+- ✅ **LLM Instructions** - Use AI assistants to help customize
+- ✅ **Automatic Updates** - Metadata, structured data, and content populated automatically
+- ✅ **Type Safety** - Well-documented configuration structure
+- ✅ **Build Tools** - Gulp-based build system with Sass compilation
+- ✅ **No Database Required** - Static site with Google Sheets integration for RSVPs
 
-**Performance:**
-- Native IntersectionObserver (lazy loading)
-- Resource hints (preconnect, dns-prefetch)
-- Deferred script loading
-- Image lazy loading
+## 🚀 Quick Start
 
-# Getting Started
+### Option 1: 15-Minute Setup (Recommended)
 
-## Quick Start (Local Development)
-1. `$ git clone https://github.com/rampatra/wedding-website.git` - clone this project to your computer
-2. `$ cd wedding-website` - go inside the project directory
-3. `$ npm install` - install dependencies (195 packages, 0 vulnerabilities)
-4. `$ npm run build` - compile Sass to CSS, minify ES6+ JavaScript
-5. That's it, open `index.html` in your browser by double-clicking it.
+**Perfect for non-technical users or those who want to get started quickly.**
 
-**Build Commands:**
-- `npm run build` - Build CSS and JS for production
-- `npm run watch` - Watch Sass files for changes during development
+1. **Fork this repository** to your GitHub account
 
-## API Key Configuration
-
-The website uses API keys for Google Maps, Google Analytics, and Uber integration. These are configured in `js/config.js`.
-
-**For your own deployment:**
-
-1. **Get a Google Maps API Key:**
-   - Go to [Google Cloud Console](https://console.cloud.google.com/google/maps-apis/credentials)
-   - Create an API key
-   - **IMPORTANT:** Restrict the key to your domain(s) under "HTTP referrers"
-   - Enable only "Maps JavaScript API"
-
-2. **Get a Google Analytics 4 Measurement ID:**
-   - Create a GA4 property at [Google Analytics](https://analytics.google.com/)
-   - Copy your Measurement ID (format: G-XXXXXXXXXX)
-
-3. **Update `js/config.js`:**
-   ```javascript
-   const CONFIG = {
-       GOOGLE_MAPS_API_KEY: 'YOUR_RESTRICTED_API_KEY',
-       GA4_MEASUREMENT_ID: 'G-XXXXXXXXXX',
-       UBER_CLIENT_ID: 'YOUR_UBER_CLIENT_ID', // optional
-       RSVP: {
-           FORM_ACTION_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL'
-       }
-   };
+2. **Clone and install:**
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/wedding-website.git
+   cd wedding-website
+   npm install
    ```
 
-4. **Deploy to GitHub Pages:**
-   - Push your changes to your repository
-   - Enable GitHub Pages in repository settings
-   - See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions
+3. **Copy template files:**
+   ```bash
+   cd js
+   cp wedding-data.example.js wedding-data.js
+   cp config.example.js config.js
+   cd ..
+   ```
 
-**Note:** The API keys in this repository are examples. While they are safe to commit when properly restricted (see [SECURITY.md](SECURITY.md)), you should replace them with your own keys for production use.
+4. **Edit your wedding details:**
+   Open `js/wedding-data.js` and update:
+   - Couple names
+   - Wedding dates and events
+   - Venue information
+   - Your love story
+   - Social media handles
+   - Image paths
 
-# Using as a Template
+5. **Replace photos** in `/img` folder with your own
 
-This website is designed to be easily customizable for your own wedding! All personal information has been centralized into configuration files for easy modification.
+6. **Build and preview:**
+   ```bash
+   npm run build
+   ```
+   Open `index.html` in your browser
 
-## 🚀 Quick Customization Guide
+7. **Deploy to GitHub Pages** (see [Deployment](#-deployment))
 
-### Step 1: Copy the Configuration Template
+👉 **Detailed walkthrough:** See [TEMPLATE_QUICK_START.md](TEMPLATE_QUICK_START.md)
 
-```bash
-cd js
-cp wedding-data.example.js wedding-data.js
-cp config.example.js config.js
-```
+### Option 2: AI-Assisted Setup (Easiest)
 
-### Step 2: Edit Your Wedding Information
+**Use an LLM coding assistant like Claude or ChatGPT to help you!**
 
-Open `js/wedding-data.js` and update with your details:
+1. Fork and clone this repository
+2. Open [LLM-INSTRUCTIONS.md](LLM-INSTRUCTIONS.md)
+3. Copy the prompt template and fill in your wedding details
+4. Paste into your AI assistant (Claude, ChatGPT, etc.)
+5. Let the AI update all your configuration files!
 
-- **Couple Information**: Names, your love story, photos
-- **Wedding Events**: Dates, times, descriptions for all your events
-- **Venue Details**: Name, address, coordinates, contact info
-- **RSVP Configuration**: Deadline, invite codes, form URL
-- **Images**: Paths to your photos (hero, couple, engagement gallery)
-- **Social Media**: Instagram hashtag, Twitter handle
-- **Theme Colors**: Primary color scheme
-- **Metadata**: Page title, descriptions for SEO
+👉 **See:** [LLM-INSTRUCTIONS.md](LLM-INSTRUCTIONS.md) for complete AI-assisted setup guide
 
-### Step 3: Configure API Keys
+## 📝 Configuration Overview
 
-Open `js/config.js` and add your API keys:
+All your wedding information lives in **one file**: `js/wedding-data.js`
 
 ```javascript
-const CONFIG = {
-    GOOGLE_MAPS_API_KEY: 'YOUR_API_KEY_HERE',
-    GA4_MEASUREMENT_ID: 'G-XXXXXXXXXX',
-    UBER_CLIENT_ID: 'YOUR_UBER_CLIENT_ID', // optional
-    RSVP: {
-        FORM_ACTION_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL'
-    }
+const WEDDING_DATA = {
+    couple: {
+        bride: { name: "Jane", fullName: "Jane Smith" },
+        groom: { name: "John", fullName: "John Doe" },
+        coupleNames: "John & Jane",
+        story: { /* your love story */ }
+    },
+    events: [ /* your wedding events */ ],
+    venue: { /* venue details and coordinates */ },
+    rsvp: { /* RSVP configuration */ },
+    images: { /* paths to your photos */ },
+    social: { /* Instagram, Twitter handles */ },
+    meta: { /* SEO and page metadata */ },
+    theme: { /* color customization */ }
 };
 ```
 
-### Step 4: Replace Images
+**What gets automatically updated:**
+- Page title and metadata
+- Open Graph tags for social sharing
+- Schema.org structured data
+- All event details and timings
+- Venue map and location
+- RSVP form validation
+- "Add to Calendar" buttons
+- Instagram hashtag section
+- Engagement photo gallery
+- Footer text
 
-Place your images in the `/img` folder:
+See `js/wedding-data.example.js` for complete configuration reference.
 
-**Required Images:**
-- `hero-min.jpg` - Main banner image (1920x1080px recommended)
-- `logo-lg.png` - Your wedding logo/monogram
-- `img/IMG_2317.jpg` - First photo for "How we met" section
-- `img/DSD_0214.jpg` - Second photo for "How we met" section
+## 🎨 Customization
 
-**Engagement Gallery** (`/img/eng_pics/` folder):
-- Add 6 photos with both thumbnail and full-size versions
-- Thumbnail naming: `photo1-min.jpg`
-- Full-size naming: `photo1.jpg`
-- Update the file paths in `wedding-data.js`
+### Basic Customization (No Coding Required)
 
-**Optional:**
-- `iphone_instagram.jpg` - For Instagram hashtag section
+Everything can be customized by editing `js/wedding-data.js`:
 
-### Step 5: Update manifest.json
+- **Couple Information** - Names, photos, love story
+- **Events** - Add, remove, or modify events
+- **Venue** - Location, address, coordinates
+- **RSVP** - Deadline, invite codes (MD5 hashed)
+- **Images** - Hero image, logo, couple photos, gallery
+- **Social Media** - Instagram hashtag, Twitter handle
+- **Theme** - Primary color scheme
+- **Features** - Enable/disable video, dress code, Instagram, etc.
 
-Edit `manifest.json` to update the PWA details:
-- `name`: Your wedding name
-- `short_name`: Short version
-- `description`: Your wedding description
-- `theme_color`: Match your theme color from wedding-data.js
+### Advanced Customization
 
-### Step 6: Generate Invite Code Hashes
+**Change color scheme:**
+Edit `sass/partials/_colors.scss` and rebuild:
+```bash
+npm run build
+```
 
-For security, invite codes are stored as MD5 hashes:
+**Modify HTML structure:**
+Edit `index.html` and `js/populate-content.js`
 
-1. Choose your invite code (e.g., "wedding2025")
-2. Generate MD5 hash at [md5hashgenerator.com](https://www.md5hashgenerator.com/)
-3. Add the hash to `wedding-data.js` under `rsvp.inviteCodeHashes`
+**Add custom sections:**
+Create new HTML sections and update the population script
 
-Example:
+## 🔧 Technology Stack
+
+**Frontend:**
+- Bootstrap 5.3.3 - Modern responsive framework
+- ES6+ JavaScript - Modern native APIs
+- Animate.css 4.1.1 - CSS animations
+- Font Awesome 6.7.0 - Icons
+- jQuery 3.7.1 - Minimal usage for plugins only
+
+**Build Tools:**
+- Gulp 5.0.0 - Task automation
+- Sass 1.80.0 - CSS preprocessing
+- Terser - JavaScript minification
+
+**APIs & Integrations:**
+- Google Maps JavaScript API - Venue location
+- Google Analytics 4 - Web analytics (optional)
+- Google Sheets - RSVP data storage
+- YouTube API - Video embedding (optional)
+- Uber API - Transportation booking (optional)
+
+**Performance & Modern Features:**
+- IntersectionObserver API - Lazy loading and animations
+- Service Worker - PWA support and offline access
+- Resource hints - Preconnect, DNS prefetch
+- Responsive images - Lazy loading with native attributes
+- Structured data - Schema.org for SEO
+
+## 🗺️ API Keys & Services
+
+### Required for Full Functionality
+
+**Google Maps API** (for venue map):
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create project → Enable "Maps JavaScript API"
+3. Create API key and restrict to your domain
+4. Add to `js/config.js`
+
+**Google Sheets** (for RSVP):
+1. Create a Google Sheet for RSVP responses
+2. Set up Google Apps Script (see detailed guide below)
+3. Add script URL to `js/config.js`
+
+### Optional Services
+
+- **Google Analytics 4** - Track website visits
+- **Uber API** - Enable "Book Uber" button
+- **YouTube** - Embed venue or memory videos
+
+See [detailed API setup guide](#setting-up-google-sheets-for-rsvp) below.
+
+## 🚀 Deployment
+
+### Deploy to GitHub Pages (Free)
+
+1. **Enable GitHub Pages:**
+   - Go to repository Settings → Pages
+   - Source: Deploy from branch `main`
+   - Save
+
+2. **Your site will be live at:**
+   ```
+   https://YOUR-USERNAME.github.io/wedding-website/
+   ```
+
+3. **Custom Domain (Optional):**
+   - Add `CNAME` file with your domain
+   - Configure DNS settings (see [GitHub Pages docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site))
+
+### Alternative Hosting
+
+This is a static website that can be hosted anywhere:
+- **Netlify** - Drag and drop deployment
+- **Vercel** - Git-based deployment
+- **AWS S3** - Host as static website
+- **Any web server** - Upload files via FTP
+
+## 📋 Setting Up Google Sheets for RSVP
+
+<details>
+<summary><b>Click to expand detailed setup instructions</b></summary>
+
+### Step 1: Create a Google Sheet
+
+1. Create a new Google Sheet
+2. Add columns: `timestamp`, `name`, `email`, `guests`, `message`
+
+### Step 2: Create Google Apps Script
+
+1. In your sheet: Extensions → Apps Script
+2. Delete default code and paste:
+
 ```javascript
-rsvp: {
-    inviteCodeHashes: [
-        "a1b2c3d4e5f6..." // MD5 hash of your invite code
-    ]
+function doPost(e) {
+    try {
+        var sheet = SpreadsheetApp.getActiveSheet();
+        var data = [
+            new Date(),
+            e.parameter.name,
+            e.parameter.email,
+            e.parameter.guests,
+            e.parameter.message || ''
+        ];
+
+        sheet.appendRow(data);
+
+        return ContentService
+            .createTextOutput(JSON.stringify({result: "success"}))
+            .setMimeType(ContentService.MimeType.JSON);
+    } catch(error) {
+        return ContentService
+            .createTextOutput(JSON.stringify({
+                result: "error",
+                message: error.message
+            }))
+            .setMimeType(ContentService.MimeType.JSON);
+    }
 }
 ```
 
-### Step 7: Build and Test
+### Step 3: Deploy
 
-```bash
-npm run build
-```
+1. Click "Deploy" → "New deployment"
+2. Type: Web app
+3. Execute as: Me
+4. Who has access: Anyone
+5. Click "Deploy"
+6. Copy the Web App URL
 
-Open `index.html` in your browser and verify:
-- ✅ All names and dates are correct
-- ✅ All events display properly
-- ✅ Venue map shows correct location
-- ✅ RSVP form works with your invite code
-- ✅ All images load correctly
-- ✅ Social media links work
-- ✅ "Add to Calendar" buttons work
+### Step 4: Configure
 
-## 🤖 Using an LLM Coding Assistant
-
-Want help from an AI assistant? See **[LLM-INSTRUCTIONS.md](LLM-INSTRUCTIONS.md)** for a comprehensive prompt you can use with Claude, ChatGPT, or other coding assistants to help you customize the website!
-
-Simply copy the prompt template, fill in your wedding details, and let the AI assistant help you update all the configuration files.
-
-## 📝 What Gets Automatically Updated
-
-The configuration system automatically populates:
-
-✅ Page metadata (title, description, Open Graph tags)
-✅ Structured data for search engines (Schema.org)
-✅ Invitation text and dates
-✅ "How we met" story section
-✅ All event details and timings
-✅ Venue information and map location
-✅ Instagram hashtag section
-✅ Engagement photo gallery
-✅ RSVP form validation
-✅ "Add to Calendar" functionality
-✅ Footer text
-
-## 🔒 Security Best Practices
-
-**IMPORTANT:** If you're forking this repository and making it public:
-
-1. **Never commit sensitive data** to your public repository:
-   - Add `js/config.js` to `.gitignore`
-   - Add `js/wedding-data.js` to `.gitignore` if it contains private information
-
-2. **Keep template files committed**:
-   - `js/config.example.js` ✅ Safe to commit
-   - `js/wedding-data.example.js` ✅ Safe to commit
-
-3. **Use environment variables** for production deployment
-
-4. **Restrict API keys** to your specific domain in Google Cloud Console
-
-See [SECURITY.md](SECURITY.md) for detailed security guidelines.
-
-## 🎨 Advanced Customization
-
-### Changing Colors
-
-Edit `sass/partials/_colors.scss` to change the color scheme:
-
-```scss
-$accent-color: #your-color-here;
-$accent-color-hover: #your-hover-color;
-```
-
-Then rebuild:
-```bash
-npm run build
-```
-
-### Adding More Events
-
-Add more events to the `events` array in `wedding-data.js`:
-
+Add the URL to `js/wedding-data.js`:
 ```javascript
-events: [
-    {
-        name: "Rehearsal Dinner",
-        date: "June 14th, 2025",
-        time: "6PM - 9PM",
-        description: "Join us for a casual dinner the night before.",
-        calendarDate: {
-            start: "20250614T180000",
-            end: "20250614T210000"
-        }
-    },
-    // ... more events
-]
+rsvp: {
+    formActionUrl: "YOUR_APPS_SCRIPT_URL_HERE"
+}
 ```
 
-### Disabling Features
+### Step 5: Email Notifications (Optional)
 
-Set these to `false` in `wedding-data.js`:
+To receive email when someone RSVPs, add to your script:
+```javascript
+MailApp.sendEmail({
+    to: "your-email@example.com",
+    subject: "New RSVP: " + e.parameter.name,
+    body: "Name: " + e.parameter.name + "\nGuests: " + e.parameter.guests
+});
+```
 
-- `video.enabled: false` - Hide video section
-- `dressCode.enabled: false` - Remove dress code modal
-- `rsvp.enabled: false` - Disable RSVP form
-- `social.instagram.enabled: false` - Hide Instagram section
+</details>
 
-### Modifying HTML Structure
+## 🔐 Security Best Practices
 
-If you need to customize the HTML layout beyond what's configurable:
+**Important for public repositories:**
 
-1. Edit `index.html` for structural changes
-2. Edit `sass/styles.scss` for styling changes
-3. Edit `js/populate-content.js` if you need to modify how content is populated
-4. Run `npm run build` to compile your changes
+1. **Protect Personal Data:**
+   - Add `js/wedding-data.js` to `.gitignore` if it contains private info
+   - Keep `js/wedding-data.example.js` as public template
 
-## 📚 Additional Resources
+2. **API Key Security:**
+   - Always restrict API keys to your domain
+   - Never commit unrestricted API keys
+   - Use environment variables for production
 
-- **Configuration Reference**: See `js/wedding-data.example.js` for all available options
-- **LLM Assistance**: See `LLM-INSTRUCTIONS.md` for AI-assisted customization
-- **RSVP Setup**: See original README sections below for Google Apps Script setup
-- **Deployment**: See `DEPLOYMENT.md` for hosting instructions
+3. **Invite Code Security:**
+   - Invite codes are MD5 hashed (not plain text)
+   - Generate hashes at [md5hashgenerator.com](https://www.md5hashgenerator.com/)
 
-## ❓ Need Help?
+## 📚 Documentation
 
-1. Check `LLM-INSTRUCTIONS.md` and use an AI coding assistant
-2. Review `wedding-data.example.js` for configuration options
-3. See the [blog post](https://blog.rampatra.com/wedding-website) for detailed feature explanations
-4. Open an issue on GitHub
-5. Reach out on [Twitter](https://twitter.com/rampatra_)
+- **[TEMPLATE_QUICK_START.md](TEMPLATE_QUICK_START.md)** - 15-minute setup guide
+- **[LLM-INSTRUCTIONS.md](LLM-INSTRUCTIONS.md)** - AI-assisted customization guide
+- **`js/wedding-data.example.js`** - Complete configuration reference
+- **[SECURITY.md](SECURITY.md)** - Security best practices
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Detailed deployment guides
 
-## Browser Support
+## 🤝 Credits & Attribution
 
-Modern browsers only (last 2 versions):
-- ✅ Chrome, Edge, Firefox, Safari
-- ✅ Mobile Safari (iOS), Chrome (Android)
-- ❌ Internet Explorer (no longer supported)
+This template is a complete rewrite and fork of the original [wedding-website](https://github.com/rampatra/wedding-website) created by **[Ram Patra](https://github.com/rampatra)**.
 
-All modern browser features used have 94%+ global support.
+**Original Project:**
+- Original Creator: [Ram Patra](https://rampatra.com)
+- Original Repository: [github.com/rampatra/wedding-website](https://github.com/rampatra/wedding-website)
+- Original Demo: [wedding.rampatra.com](http://wedding.rampatra.com/)
+- Original Blog Post: [Ram's Blog](https://blog.rampatra.com/wedding-website)
 
-# Documentation
+**What's Different in This Fork:**
 
-Comprehensive documentation is available:
+This template-focused rewrite includes:
+- ✨ Centralized configuration system (`wedding-data.js`)
+- ✨ Dynamic content population from config
+- ✨ LLM-friendly documentation for AI-assisted setup
+- ✨ Template example files for easy forking
+- ✨ Enhanced documentation focused on reusability
+- ✨ Automated metadata and structured data generation
+- ✨ Improved separation of content and code
 
-- **[MODERNIZATION_PLAN.md](MODERNIZATION_PLAN.md)** - Complete modernization roadmap and progress
-- **[UPGRADE_GUIDE.md](UPGRADE_GUIDE.md)** - Detailed changelog and migration guide
-- **[SECURITY.md](SECURITY.md)** - Security best practices and API key configuration
-- **[DEPLOYMENT.md](DEPLOYMENT.md)** - GitHub Pages and alternative hosting guides
+**Acknowledgments:**
+- Original design and concept by Ram Patra
+- Template architecture and configuration system by this fork
+- All contributors to the original project
+- The open-source community
 
-I have also written a
-[blog post describing all the features of this wedding website](https://blog.rampatra.com/wedding-website) and how to
-customize each of them according to your needs.
+If you use this template, consider:
+- Supporting Ram's original project: ⭐ Star [rampatra/wedding-website](https://github.com/rampatra/wedding-website)
+- Checking out Ram's [apps](https://rampatra.com/)
+- Sharing this template with others planning their wedding!
 
-# About Me
-Hello, my name is Ram. I am a Director of Software Engineering at [Mastercard](https://www.mastercard.com/). I enjoy making teeny tiny applications in
-my leisure time and this is one of them. Now that my wedding is over, I am open-sourcing the project. Hope you like it!
+## 🌐 Browser Support
 
-# Sponsors
-Proudly sponsored by these awesome apps. Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://x.com/rampatra_)]
+**Modern browsers only:**
+- ✅ Chrome/Edge (last 2 versions)
+- ✅ Firefox (last 2 versions)
+- ✅ Safari (last 2 versions)
+- ✅ Mobile Safari (iOS)
+- ✅ Chrome (Android)
+- ❌ Internet Explorer (not supported)
 
-<table>
-    <tr>
-        <td>
-            <a href="https://presentifyapp.com/" target="_blank"><img src="https://raw.githubusercontent.com/rampatra/assets/refs/heads/main/Presentify/Icons/icon_512.png" width="150" height="150"></a>
-        </td>
-        <td>
-            <a href="https://facescreenapp.com/" target="_blank"><img src="https://github.com/user-attachments/assets/b251b413-ccc4-48f1-a316-c2c2a71f959e" width="150" height="150"></a>
-        </td>
-        <td>
-            <a href="https://keyscreenapp.com" target="_blank"><img src="https://github.com/user-attachments/assets/4b75a739-b4b5-432c-a03c-a9bdd8309934" width="150" height="150"></a>
-        </td>
-        <td>
-            <a href="https://todobarapp.com/" target="_blank"><img src="https://todobarapp.com/assets/img/todobar/app-icon-512.png" width="150" height="150"></a>
-        </td>
-        <td>
-            <a href="https://simplefillapp.com/" target="_blank"><img src="https://github.com/user-attachments/assets/6c575d9c-b65b-4ce7-a468-30f74cfedf18" width="150" height="150"></a>
-        </td>
-    </tr>
-</table>
+All features have 94%+ global browser support.
 
-# Contribute
-First, a big thank you 🙏🏻 for the overwhelming response on [Hacker News](https://news.ycombinator.com/item?id=18556787) and [Reddit](https://www.reddit.com/r/opensource/comments/a1bx4h/i_am_open_sourcing_my_wedding_website_on_my_first/). If you'd like to contribute to the project, feel free to create a [PR](https://help.github.com/articles/about-pull-requests/). To support my work, you can buy one of the apps listed under the "Sponsors" section or click the button below.
+## 💡 Common Questions
 
-<a href="https://www.buymeacoffee.com/rampatra" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+<details>
+<summary><b>Do I need to know how to code?</b></summary>
 
-_P.S. For any queries or concerns, you can reach out to me on [Twitter](https://twitter.com/rampatra_). I'll try my best to help._
+No! You only need to edit the `wedding-data.js` configuration file with your information. You can also use an AI assistant (see [LLM-INSTRUCTIONS.md](LLM-INSTRUCTIONS.md)) to help you.
+</details>
+
+<details>
+<summary><b>How much does it cost?</b></summary>
+
+Completely free! Host on GitHub Pages at no cost. Optional services like custom domains or paid APIs are your choice.
+</details>
+
+<details>
+<summary><b>Can I use my own domain?</b></summary>
+
+Yes! GitHub Pages supports custom domains. See [GitHub's documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).
+</details>
+
+<details>
+<summary><b>What if I want to change the design?</b></summary>
+
+You can customize colors via `sass/partials/_colors.scss`, or modify HTML/CSS for deeper changes. The template is fully open-source.
+</details>
+
+<details>
+<summary><b>How do guests RSVP?</b></summary>
+
+Guests enter their details and an invite code you provide. Responses are saved to your Google Sheet. See [RSVP Setup](#setting-up-google-sheets-for-rsvp).
+</details>
+
+<details>
+<summary><b>Can I add more sections?</b></summary>
+
+Yes! Edit `index.html` and add new content sections. Update `js/populate-content.js` if you want them to be configuration-driven.
+</details>
+
+## 🐛 Troubleshooting
+
+**Map not showing?**
+- Add Google Maps API key to `js/config.js`
+- Ensure key is enabled for Maps JavaScript API
+- Check browser console for errors
+
+**Photos not loading?**
+- Verify file paths in `wedding-data.js` match your image files
+- Check that images exist in `/img` folder
+- Ensure filenames match exactly (case-sensitive)
+
+**RSVP not working?**
+- Verify invite code MD5 hash is correct
+- Check Google Apps Script is deployed and URL is in config
+- Test the Apps Script URL directly in browser
+
+**Changes not appearing?**
+- Run `npm run build` after editing SCSS/JS files
+- Hard refresh browser (Ctrl+Shift+R or Cmd+Shift+R)
+- Clear browser cache
+
+**Need more help?**
+- Check [TEMPLATE_QUICK_START.md](TEMPLATE_QUICK_START.md)
+- Review [LLM-INSTRUCTIONS.md](LLM-INSTRUCTIONS.md)
+- Open an issue on GitHub
+
+## 🤖 Contributing
+
+Contributions are welcome! If you have improvements or fixes:
+
+1. Fork this repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+**Ideas for contributions:**
+- Additional configuration options
+- New design themes
+- Improved documentation
+- Bug fixes
+- Performance improvements
+- Accessibility enhancements
+
+## 📄 License
+
+This project maintains the same open-source spirit as the original.
+
+The original project by Ram Patra is open-source and available for anyone to use. This fork builds upon that work with additional features focused on making it easier to use as a template.
+
+## ⭐ Show Your Support
+
+If you found this template helpful:
+- ⭐ Star this repository
+- ⭐ Star the [original repository](https://github.com/rampatra/wedding-website)
+- 🔗 Share with friends getting married
+- 🐛 Report issues or suggest improvements
+- 🤝 Contribute improvements
+
+## 📬 Questions or Feedback?
+
+- 💬 Open an issue on GitHub
+- 📖 Check the documentation files in this repository
+- 🤖 Use [LLM-INSTRUCTIONS.md](LLM-INSTRUCTIONS.md) to get AI-assisted help
+
+---
+
+**Made with ❤️ for couples celebrating their special day**
+
+*Based on the original work by [Ram Patra](https://github.com/rampatra) • Template features and documentation by this fork*
