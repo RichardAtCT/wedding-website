@@ -46,6 +46,7 @@ When a user asks you to help customize this wedding website, follow these steps:
 Ask the user for the following essential information if not already provided:
 
 **Couple Information:**
+
 - Bride's full name and preferred short name
 - Groom's full name and preferred short name
 - How they met (their love story)
@@ -53,6 +54,7 @@ Ask the user for the following essential information if not already provided:
 
 **Event Details:**
 For each wedding event (ceremony, reception, pre-wedding events):
+
 - Event name
 - Date (month, day, year)
 - Time (start and end)
@@ -60,17 +62,20 @@ For each wedding event (ceremony, reception, pre-wedding events):
 - Which event is the main ceremony
 
 **Venue Information:**
+
 - Venue name
 - Full address (street, city, state, postal code, country)
 - Venue coordinates (latitude/longitude) - if they don't know, you can look this up
 - Contact person name and phone number(s)
 
 **RSVP Configuration:**
+
 - RSVP deadline date
 - Invite code(s) they want to use (you'll need to generate MD5 hashes)
 - Whether they've set up Google Apps Script for form submission
 
 **Visual Assets:**
+
 - Confirm they have photos ready to upload:
   - Hero/banner image
   - 2 photos for "how we met" section
@@ -78,11 +83,13 @@ For each wedding event (ceremony, reception, pre-wedding events):
   - Logo (optional)
 
 **Social Media:**
+
 - Instagram hashtag (without #)
 - Twitter handle (with @)
 - Any other social media
 
 **Additional:**
+
 - Dress code for each event (optional)
 - YouTube video ID if they want to feature a video (optional)
 - Website URL where it will be hosted
@@ -115,6 +122,7 @@ For each wedding event (ceremony, reception, pre-wedding events):
 ### Step 3: Update config.js (if needed)
 
 If the user has API keys, help them update `js/config.js`:
+
 - Google Maps API key (required for venue map)
 - Google Analytics 4 Measurement ID (optional)
 - Uber Client ID (optional)
@@ -125,6 +133,7 @@ Remind them: **Never commit config.js to public repositories!**
 ### Step 4: Update manifest.json
 
 Update the PWA manifest with:
+
 - New couple names
 - Updated description
 - Their preferred theme color (from wedding-data.js)
@@ -190,6 +199,7 @@ After making changes, provide this checklist to the user:
 
 **To add more events:**
 Add a new object to the `events` array in wedding-data.js:
+
 ```javascript
 {
     name: "Rehearsal Dinner",
@@ -205,11 +215,13 @@ Add a new object to the `events` array in wedding-data.js:
 
 **To change the color scheme:**
 Update `theme.primaryColor` in wedding-data.js, then update the SCSS variables in `sass/partials/_colors.scss`:
+
 ```scss
 $accent-color: #your-color-here;
 ```
 
 **To disable features:**
+
 - Set `video.enabled: false` to hide video section
 - Set `dressCode.enabled: false` to remove dress code modal
 - Set `rsvp.enabled: false` to disable RSVP form
@@ -218,6 +230,7 @@ $accent-color: #your-color-here;
 ### Step 9: Security Reminders
 
 Always remind users:
+
 - Never commit `config.js` with real API keys to public repos
 - Add `config.js` and `wedding-data.js` to `.gitignore` if making the repo public
 - Use environment variables or keep a local copy of these files
@@ -226,6 +239,7 @@ Always remind users:
 ### Step 10: Additional Help
 
 If the user needs help with:
+
 - **Setting up Google Apps Script for RSVP:** Direct them to the original README section
 - **Getting Google Maps API key:** Provide link to Google Cloud Console
 - **Generating MD5 hashes:** Suggest https://www.md5hashgenerator.com/
@@ -275,6 +289,7 @@ Always ask clarifying questions and provide code examples when helping with thes
 ## Error Prevention
 
 Common issues to watch for:
+
 - ✗ Incorrect date format in calendar dates
 - ✗ Missing comma in JavaScript arrays/objects
 - ✗ Incorrect file paths for images
@@ -290,6 +305,7 @@ Always validate the JavaScript syntax after making changes and test thoroughly!
 ## Need More Help?
 
 If you encounter issues or need clarification on any part of this template, please:
+
 1. Check the main README.md for technical documentation
 2. Review the original code comments
 3. Consult the wedding-data.example.js for reference
