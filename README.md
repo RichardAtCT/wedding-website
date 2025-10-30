@@ -99,6 +99,216 @@ The website uses API keys for Google Maps, Google Analytics, and Uber integratio
 
 **Note:** The API keys in this repository are examples. While they are safe to commit when properly restricted (see [SECURITY.md](SECURITY.md)), you should replace them with your own keys for production use.
 
+# Using as a Template
+
+This website is designed to be easily customizable for your own wedding! All personal information has been centralized into configuration files for easy modification.
+
+## 🚀 Quick Customization Guide
+
+### Step 1: Copy the Configuration Template
+
+```bash
+cd js
+cp wedding-data.example.js wedding-data.js
+cp config.example.js config.js
+```
+
+### Step 2: Edit Your Wedding Information
+
+Open `js/wedding-data.js` and update with your details:
+
+- **Couple Information**: Names, your love story, photos
+- **Wedding Events**: Dates, times, descriptions for all your events
+- **Venue Details**: Name, address, coordinates, contact info
+- **RSVP Configuration**: Deadline, invite codes, form URL
+- **Images**: Paths to your photos (hero, couple, engagement gallery)
+- **Social Media**: Instagram hashtag, Twitter handle
+- **Theme Colors**: Primary color scheme
+- **Metadata**: Page title, descriptions for SEO
+
+### Step 3: Configure API Keys
+
+Open `js/config.js` and add your API keys:
+
+```javascript
+const CONFIG = {
+    GOOGLE_MAPS_API_KEY: 'YOUR_API_KEY_HERE',
+    GA4_MEASUREMENT_ID: 'G-XXXXXXXXXX',
+    UBER_CLIENT_ID: 'YOUR_UBER_CLIENT_ID', // optional
+    RSVP: {
+        FORM_ACTION_URL: 'YOUR_GOOGLE_APPS_SCRIPT_URL'
+    }
+};
+```
+
+### Step 4: Replace Images
+
+Place your images in the `/img` folder:
+
+**Required Images:**
+- `hero-min.jpg` - Main banner image (1920x1080px recommended)
+- `logo-lg.png` - Your wedding logo/monogram
+- `img/IMG_2317.jpg` - First photo for "How we met" section
+- `img/DSD_0214.jpg` - Second photo for "How we met" section
+
+**Engagement Gallery** (`/img/eng_pics/` folder):
+- Add 6 photos with both thumbnail and full-size versions
+- Thumbnail naming: `photo1-min.jpg`
+- Full-size naming: `photo1.jpg`
+- Update the file paths in `wedding-data.js`
+
+**Optional:**
+- `iphone_instagram.jpg` - For Instagram hashtag section
+
+### Step 5: Update manifest.json
+
+Edit `manifest.json` to update the PWA details:
+- `name`: Your wedding name
+- `short_name`: Short version
+- `description`: Your wedding description
+- `theme_color`: Match your theme color from wedding-data.js
+
+### Step 6: Generate Invite Code Hashes
+
+For security, invite codes are stored as MD5 hashes:
+
+1. Choose your invite code (e.g., "wedding2025")
+2. Generate MD5 hash at [md5hashgenerator.com](https://www.md5hashgenerator.com/)
+3. Add the hash to `wedding-data.js` under `rsvp.inviteCodeHashes`
+
+Example:
+```javascript
+rsvp: {
+    inviteCodeHashes: [
+        "a1b2c3d4e5f6..." // MD5 hash of your invite code
+    ]
+}
+```
+
+### Step 7: Build and Test
+
+```bash
+npm run build
+```
+
+Open `index.html` in your browser and verify:
+- ✅ All names and dates are correct
+- ✅ All events display properly
+- ✅ Venue map shows correct location
+- ✅ RSVP form works with your invite code
+- ✅ All images load correctly
+- ✅ Social media links work
+- ✅ "Add to Calendar" buttons work
+
+## 🤖 Using an LLM Coding Assistant
+
+Want help from an AI assistant? See **[LLM-INSTRUCTIONS.md](LLM-INSTRUCTIONS.md)** for a comprehensive prompt you can use with Claude, ChatGPT, or other coding assistants to help you customize the website!
+
+Simply copy the prompt template, fill in your wedding details, and let the AI assistant help you update all the configuration files.
+
+## 📝 What Gets Automatically Updated
+
+The configuration system automatically populates:
+
+✅ Page metadata (title, description, Open Graph tags)
+✅ Structured data for search engines (Schema.org)
+✅ Invitation text and dates
+✅ "How we met" story section
+✅ All event details and timings
+✅ Venue information and map location
+✅ Instagram hashtag section
+✅ Engagement photo gallery
+✅ RSVP form validation
+✅ "Add to Calendar" functionality
+✅ Footer text
+
+## 🔒 Security Best Practices
+
+**IMPORTANT:** If you're forking this repository and making it public:
+
+1. **Never commit sensitive data** to your public repository:
+   - Add `js/config.js` to `.gitignore`
+   - Add `js/wedding-data.js` to `.gitignore` if it contains private information
+
+2. **Keep template files committed**:
+   - `js/config.example.js` ✅ Safe to commit
+   - `js/wedding-data.example.js` ✅ Safe to commit
+
+3. **Use environment variables** for production deployment
+
+4. **Restrict API keys** to your specific domain in Google Cloud Console
+
+See [SECURITY.md](SECURITY.md) for detailed security guidelines.
+
+## 🎨 Advanced Customization
+
+### Changing Colors
+
+Edit `sass/partials/_colors.scss` to change the color scheme:
+
+```scss
+$accent-color: #your-color-here;
+$accent-color-hover: #your-hover-color;
+```
+
+Then rebuild:
+```bash
+npm run build
+```
+
+### Adding More Events
+
+Add more events to the `events` array in `wedding-data.js`:
+
+```javascript
+events: [
+    {
+        name: "Rehearsal Dinner",
+        date: "June 14th, 2025",
+        time: "6PM - 9PM",
+        description: "Join us for a casual dinner the night before.",
+        calendarDate: {
+            start: "20250614T180000",
+            end: "20250614T210000"
+        }
+    },
+    // ... more events
+]
+```
+
+### Disabling Features
+
+Set these to `false` in `wedding-data.js`:
+
+- `video.enabled: false` - Hide video section
+- `dressCode.enabled: false` - Remove dress code modal
+- `rsvp.enabled: false` - Disable RSVP form
+- `social.instagram.enabled: false` - Hide Instagram section
+
+### Modifying HTML Structure
+
+If you need to customize the HTML layout beyond what's configurable:
+
+1. Edit `index.html` for structural changes
+2. Edit `sass/styles.scss` for styling changes
+3. Edit `js/populate-content.js` if you need to modify how content is populated
+4. Run `npm run build` to compile your changes
+
+## 📚 Additional Resources
+
+- **Configuration Reference**: See `js/wedding-data.example.js` for all available options
+- **LLM Assistance**: See `LLM-INSTRUCTIONS.md` for AI-assisted customization
+- **RSVP Setup**: See original README sections below for Google Apps Script setup
+- **Deployment**: See `DEPLOYMENT.md` for hosting instructions
+
+## ❓ Need Help?
+
+1. Check `LLM-INSTRUCTIONS.md` and use an AI coding assistant
+2. Review `wedding-data.example.js` for configuration options
+3. See the [blog post](https://blog.rampatra.com/wedding-website) for detailed feature explanations
+4. Open an issue on GitHub
+5. Reach out on [Twitter](https://twitter.com/rampatra_)
+
 ## Browser Support
 
 Modern browsers only (last 2 versions):

@@ -183,31 +183,44 @@ $(document).ready(function () {
     });
 
     /********************** Add to Calendar **********************/
+    // Use wedding data if available, otherwise fall back to defaults
+    var calendarData = typeof WEDDING_DATA !== 'undefined' ? WEDDING_DATA.calendar : {
+        title: "Our Wedding",
+        startDate: "20171127T100000",
+        endDate: "20171129T000000",
+        location: "Wedding Venue",
+        description: "Join us for our wedding celebration!"
+    };
+
+    var venueData = typeof WEDDING_DATA !== 'undefined' ? WEDDING_DATA.venue : {
+        name: "Wedding Venue",
+        contact: { name: "Contact", phones: ["+1 234-567-8900"] }
+    };
+
+    // Convert calendar date format (YYYYMMDDTHHMMSS) to Date object
+    function parseCalendarDate(dateStr) {
+        if (!dateStr) return new Date();
+        var year = parseInt(dateStr.substring(0, 4));
+        var month = parseInt(dateStr.substring(4, 6)) - 1; // JS months are 0-indexed
+        var day = parseInt(dateStr.substring(6, 8));
+        var hour = parseInt(dateStr.substring(9, 11)) || 0;
+        var minute = parseInt(dateStr.substring(11, 13)) || 0;
+        return new Date(year, month, day, hour, minute);
+    }
+
     var myCalendar = createCalendar({
         options: {
             class: '',
-            // You can pass an ID. If you don't, one will be generated for you
             id: ''
         },
         data: {
-            // Event title
-            title: "Ram and Antara's Wedding",
-
-            // Event start date
-            start: new Date('Nov 27, 2017 10:00'),
-
-            // Event duration (IN MINUTES)
-            // duration: 120,
-
-            // You can also choose to set an end time
-            // If an end time is set, this will take precedence over duration
-            end: new Date('Nov 29, 2017 00:00'),
-
-            // Event Address
-            address: 'ITC Fortune Park Hotel, Kolkata',
-
-            // Event Description
-            description: "We can't wait to see you on our big day. For any queries or issues, please contact Mr. Amit Roy at +91 9876543210."
+            title: calendarData.title,
+            start: parseCalendarDate(calendarData.startDate),
+            end: parseCalendarDate(calendarData.endDate),
+            address: calendarData.location,
+            description: calendarData.description ||
+                "We can't wait to see you on our big day. For any queries or issues, please contact " +
+                venueData.contact.name + " at " + venueData.contact.phones[0] + "."
         }
     });
 
@@ -221,11 +234,22 @@ $(document).ready(function () {
 
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
 
-        if (MD5($('#invite_code').val()) !== 'b0e53b10c1f55ede516b240036b88f40'
-            && MD5($('#invite_code').val()) !== '2ac7f43695eb0479d5846bb38eec59cc') {
+        // Get RSVP configuration from wedding data
+        var rsvpConfig = typeof WEDDING_DATA !== 'undefined' ? WEDDING_DATA.rsvp : {
+            inviteCodeHashes: ['b0e53b10c1f55ede516b240036b88f40', '2ac7f43695eb0479d5846bb38eec59cc'],
+            formActionUrl: 'https://script.google.com/macros/s/AKfycbyo0rEknln8LedEP3bkONsfOh776IR5lFidLhJFQ6jdvRiH4dKvHZmtoIybvnxpxYr2cA/exec'
+        };
+
+        // Validate invite code against all configured hashes
+        var inviteCodeHash = MD5($('#invite_code').val());
+        var isValidCode = rsvpConfig.inviteCodeHashes.some(function(hash) {
+            return inviteCodeHash === hash;
+        });
+
+        if (!isValidCode) {
             $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
         } else {
-            $.post('https://script.google.com/macros/s/AKfycbyo0rEknln8LedEP3bkONsfOh776IR5lFidLhJFQ6jdvRiH4dKvHZmtoIybvnxpxYr2cA/exec', data)
+            $.post(rsvpConfig.formActionUrl, data)
                 .done(function (data) {
                     console.log(data);
                     if (data.result === "error") {
@@ -248,7 +272,12 @@ $(document).ready(function () {
 
 // Google map
 function initMap() {
-    var location = {lat: 22.5932759, lng: 88.27027720000001};
+    // Get venue coordinates from wedding data
+    var venueData = typeof WEDDING_DATA !== 'undefined' ? WEDDING_DATA.venue : null;
+    var location = venueData ?
+        {lat: venueData.coordinates.lat, lng: venueData.coordinates.lng} :
+        {lat: 22.5932759, lng: 88.27027720000001};
+
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
         zoom: 15,
         center: location,
