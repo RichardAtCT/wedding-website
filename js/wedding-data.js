@@ -14,21 +14,21 @@ const WEDDING_DATA = {
   // ====================
   couple: {
     bride: {
-      name: 'Antara',
-      fullName: 'Antara Roy', // Used in structured data
+      name: 'Alex',
+      fullName: 'Alex Johnson', // Used in structured data
     },
     groom: {
-      name: 'Ram',
-      fullName: 'Ram Patra',
-      website: 'https://rampatra.com', // Optional: Personal website URL
+      name: 'Jordan',
+      fullName: 'Jordan Smith',
+      website: '', // Optional: Personal website URL
     },
-    coupleNames: 'Ram & Antara', // How you want your names to appear together
+    coupleNames: 'Alex & Jordan', // How you want your names to appear together
     story: {
       heading: 'How we met',
-      text: `I first saw Antara in the Fall of 2008 at Amity University, Uttar Pradesh. She was the most
-                   stunning beauty I have ever seen and from that day forward, I knew my heart belonged to her. Like a
-                   complete loser, I was too nervous to talk to her for almost a year. Finally, in June of 2009, I got
-                   some courage and introduced myself to her and the rest, as they say, is history.`,
+      text: `We first met in the spring at a local coffee shop. It was one of those perfect moments where
+                   everything just felt right. We started talking about our favorite books and realized we had so much
+                   in common. From that day forward, we knew there was something special between us. After months of
+                   friendship and countless conversations, we finally decided to take the next step together.`,
       image1: 'img/IMG_2317.jpg', // First photo in the story section
       image2: 'img/DSD_0214.jpg', // Second photo in the story section
     },
@@ -39,47 +39,47 @@ const WEDDING_DATA = {
   // ====================
   events: [
     {
-      name: 'Mehndi',
-      date: 'November 27th, 2017',
-      time: '1PM - 5PM',
+      name: 'Welcome Reception',
+      date: 'June 15th, 2024',
+      time: '2PM - 5PM',
       description:
-        "It is a foundation of any wedding. Mehndi is a ceremony of love, in which the bride and groom's palms are decorated with beautiful and intricate designs of henna.",
+        "Join us for a casual afternoon reception where we'll welcome all our guests. Light refreshments will be served as we gather to celebrate the beginning of our wedding festivities.",
       calendarDate: {
-        start: '20171127T130000',
-        end: '20171127T170000',
+        start: '20240615T140000',
+        end: '20240615T170000',
       },
     },
     {
-      name: 'Cocktail Night',
-      date: 'November 27th, 2017',
-      time: '7PM - 12AM',
+      name: 'Rehearsal Dinner',
+      date: 'June 15th, 2024',
+      time: '7PM - 11PM',
       description:
-        "Let's get the party started! Join us for an evening of great music, dancing, drinks and lots of fun as we celebrate the beginning of our new journey together.",
+        'An intimate evening with close family and friends. Join us for dinner, drinks, and toasts as we celebrate the night before our big day.',
       calendarDate: {
-        start: '20171127T190000',
-        end: '20171128T000000',
+        start: '20240615T190000',
+        end: '20240615T230000',
       },
     },
     {
-      name: 'Haldi',
-      date: 'November 28th, 2017',
-      time: '10AM - 11AM',
+      name: 'Wedding Ceremony',
+      date: 'June 16th, 2024',
+      time: '3PM - 4PM',
       description:
-        "The Haldi ceremony is a traditional ritual where turmeric paste is applied to the bride and groom. It's believed to bring good fortune and a radiant glow for the big day.",
+        'The ceremony where we exchange our vows and commit to spending the rest of our lives together. Please arrive 15 minutes early to find your seats.',
       calendarDate: {
-        start: '20171128T100000',
-        end: '20171128T110000',
+        start: '20240616T150000',
+        end: '20240616T160000',
       },
     },
     {
-      name: 'Wedding',
-      date: 'November 28th, 2017',
-      time: '6PM - 12AM',
+      name: 'Reception',
+      date: 'June 16th, 2024',
+      time: '5PM - 11PM',
       description:
-        'This is the main event! Join us as we exchange vows and celebrate our union with traditional ceremonies, followed by dinner and dancing.',
+        'Celebrate with us! Join us for dinner, dancing, and celebrations as we begin our journey as a married couple.',
       calendarDate: {
-        start: '20171128T180000',
-        end: '20171129T000000',
+        start: '20240616T170000',
+        end: '20240616T230000',
       },
       isMainEvent: true, // Used for structured data
     },
@@ -87,33 +87,33 @@ const WEDDING_DATA = {
 
   // Calendar event details (used for "Add to Calendar" feature)
   calendar: {
-    title: "Ram & Antara's Wedding",
-    description: 'Join us for the wedding celebration of Ram and Antara!',
-    location: 'ITC Fortune Park, Kona Expressway, Howrah',
+    title: "Alex & Jordan's Wedding",
+    description: 'Join us for the wedding celebration of Alex and Jordan!',
+    location: 'Grand Plaza Hotel, 123 Main Street, Downtown',
     // Overall event timespan (should cover all events)
-    startDate: '20171127T100000',
-    endDate: '20171129T000000',
+    startDate: '20240615T140000',
+    endDate: '20240616T230000',
   },
 
   // ====================
   // VENUE INFORMATION
   // ====================
   venue: {
-    name: 'ITC Fortune Park',
+    name: 'Grand Plaza Hotel',
     address: {
-      street: 'Kona Expressway',
-      city: 'Howrah',
-      state: 'West Bengal',
-      postalCode: '711403',
-      country: 'IN',
+      street: '123 Main Street',
+      city: 'Downtown',
+      state: 'California',
+      postalCode: '90001',
+      country: 'US',
     },
     coordinates: {
-      lat: 22.5932759,
-      lng: 88.27027720000001,
+      lat: 34.0522,
+      lng: -118.2437,
     },
     contact: {
-      name: 'Mr. Amit Roy',
-      phones: ['+91 9412345678', '+91 7123456789'],
+      name: 'Event Coordinator',
+      phones: ['+1 555-123-4567', '+1 555-987-6543'],
     },
   },
 
@@ -122,13 +122,12 @@ const WEDDING_DATA = {
   // ====================
   rsvp: {
     enabled: true,
-    deadline: "November 1st '17",
+    deadline: "May 1st '24",
     // MD5 hashed invite codes (use https://www.md5hashgenerator.com/ to generate)
     // Example: "271117" hashes to "b0e53b10c1f55ede516b240036b88f40"
     inviteCodeHashes: ['b0e53b10c1f55ede516b240036b88f40', '2ac7f43695eb0479d5846bb38eec59cc'],
     // Google Apps Script URL for form submission (see README for setup instructions)
-    formActionUrl:
-      'https://script.google.com/macros/s/AKfycbyo0rEknln8LedEP3bkONsfOh776IR5lFidLhJFQ6jdvRiH4dKvHZmtoIybvnxpxYr2cA/exec',
+    formActionUrl: '',
   },
 
   // ====================
@@ -151,9 +150,9 @@ const WEDDING_DATA = {
 
   // Optional: YouTube video to showcase location or memories
   video: {
-    enabled: true,
-    youtubeId: '9giqL1H6yRs', // YouTube video ID
-    location: 'Kolkata', // Location name shown above video
+    enabled: false,
+    youtubeId: '', // YouTube video ID
+    location: 'Our City', // Location name shown above video
   },
 
   // ====================
@@ -162,11 +161,11 @@ const WEDDING_DATA = {
   social: {
     instagram: {
       enabled: true,
-      hashtag: 'RamAndAntara', // Without the # symbol
-      url: 'https://www.instagram.com/explore/tags/ramandantara/',
+      hashtag: 'AlexAndJordan2024', // Without the # symbol
+      url: 'https://www.instagram.com/explore/tags/alexandjordan2024/',
     },
     twitter: {
-      handle: '@rampatra_', // Include the @ symbol
+      handle: '@weddingcouple', // Include the @ symbol
     },
   },
 
@@ -177,22 +176,22 @@ const WEDDING_DATA = {
     enabled: true,
     events: [
       {
-        name: 'Mehndi',
+        name: 'Welcome Reception',
         description:
-          'Wear something colorful and comfortable. Think vibrant yellows, greens, and oranges!',
+          'Casual chic attire. Sundresses, slacks and button-downs are perfect for this afternoon event.',
       },
       {
-        name: 'Cocktail Night',
-        description: 'Dress to impress! Cocktail attire - elegant dresses and suits.',
+        name: 'Rehearsal Dinner',
+        description: 'Semi-formal attire. Cocktail dresses and dress shirts with slacks.',
       },
       {
-        name: 'Haldi',
+        name: 'Wedding Ceremony',
         description:
-          "Wear clothes you don't mind getting stained with turmeric. Whites and light colors are traditional.",
+          'Formal attire. Floor-length gowns and tuxedos or formal suits. Please avoid wearing white.',
       },
       {
-        name: 'Wedding',
-        description: 'Traditional Indian wedding attire. Sarees, lehengas, sherwanis, or suits.',
+        name: 'Reception',
+        description: 'Formal attire continues from the ceremony. Dancing shoes recommended!',
       },
     ],
   },
@@ -201,19 +200,19 @@ const WEDDING_DATA = {
   // PAGE METADATA
   // ====================
   meta: {
-    title: 'Ram & Antara getting hitched!',
+    title: 'Alex & Jordan getting married!',
     description:
-      "On November 27-28, 2017, we will celebrate our love with family and friends in Kolkata, India. We can't wait to see you there!",
+      "On June 15-16, 2024, we will celebrate our love with family and friends. We can't wait to see you there!",
     keywords:
-      'wedding, Ram Antara, wedding invitation, November 27, November 28, ITC Fortune Park, Howrah, Kolkata',
+      'wedding, Alex Jordan, wedding invitation, June 15, June 16, Grand Plaza Hotel, wedding celebration',
     // Open Graph & Social Sharing
-    ogTitle: "Ram & Antara's Wedding | November 27-28, 2017",
-    ogImage: 'https://wedding.ramswaroop.me/img/hero-min.jpg',
-    ogUrl: 'https://wedding.ramswaroop.me',
+    ogTitle: "Alex & Jordan's Wedding | June 15-16, 2024",
+    ogImage: 'https://yourwebsite.com/img/hero-min.jpg',
+    ogUrl: 'https://yourwebsite.com',
     // For PWA manifest
-    manifestName: 'Ram & Antara Wedding',
-    manifestShortName: 'R&A Wedding',
-    manifestDescription: 'Join us for our wedding celebration in Kolkata!',
+    manifestName: 'Alex & Jordan Wedding',
+    manifestShortName: 'A&J Wedding',
+    manifestDescription: 'Join us for our wedding celebration!',
   },
 
   // ====================
@@ -230,7 +229,7 @@ const WEDDING_DATA = {
   // FOOTER
   // ====================
   footer: {
-    text: 'Crafted by Ram with lots of heart for Antara',
+    text: 'Made with love for our special day',
     showBackToTop: true,
   },
 };
