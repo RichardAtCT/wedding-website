@@ -2,10 +2,10 @@
 
 window.onload = function() {
 	function addIcon(el, entity) {
-		var html = el.innerHTML;
+		const html = el.innerHTML;
 		el.innerHTML = '<span style="font-family: \'et-line\'">' + entity + '</span>' + html;
 	}
-	var icons = {
+	let icons = {
 			'icon-mobile' : '&#xe000;',
 			'icon-laptop' : '&#xe001;',
 			'icon-desktop' : '&#xe002;',
