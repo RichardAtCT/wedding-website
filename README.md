@@ -1,6 +1,18 @@
 # Wedding Website
-A beautiful, feature rich, device friendly wedding website.  
+A beautiful, feature rich, device friendly wedding website.
 _See [wedding.rampatra.com](http://wedding.rampatra.com/) for a demo. Use invite code `271117` to RSVP._
+
+## ⚡ Modern Stack (2025 Update)
+
+This website has been modernized to 2025 standards with:
+- **Bootstrap 5.3.3** - Latest Bootstrap with modern grid system
+- **ES6+ JavaScript** - Modern JavaScript with native browser APIs
+- **Performance Optimized** - Lazy loading, resource hints, and deferred scripts
+- **Zero Vulnerabilities** - All dependencies updated and secured
+- **Native APIs** - IntersectionObserver replaces jQuery plugins
+- **Google Analytics 4** - Latest analytics platform
+
+[View full modernization plan](MODERNIZATION_PLAN.md) | **Status:** Phase 1 ✅ Phase 2 ✅
 
 # Highlights
 1. Slick and fully __responsive__ design.
@@ -14,14 +26,43 @@ _See [wedding.rampatra.com](http://wedding.rampatra.com/) for a demo. Use invite
    [GitHub Pages](https://pages.github.com/) to host and Google sheets (with the help of Google scripts) to store RSVP
    data.
 
+# Technology Stack
+
+**Frontend:**
+- Bootstrap 5.3.3 (responsive grid, modals, utilities)
+- jQuery 3.7.1 (minimal usage, transitioning to vanilla JS)
+- Animate.css 4.1.1 (CSS animations)
+- Font Awesome 6.7.0 (icons)
+
+**Build Tools:**
+- Gulp 5.0.0 (task runner)
+- Sass 1.80.0 (CSS preprocessing)
+- Terser (ES6+ JavaScript minification)
+
+**APIs & Services:**
+- Google Maps API (venue location)
+- Google Analytics 4 (web analytics)
+- YouTube API (video embedding)
+- Google Sheets (RSVP data storage)
+
+**Performance:**
+- Native IntersectionObserver (lazy loading)
+- Resource hints (preconnect, dns-prefetch)
+- Deferred script loading
+- Image lazy loading
+
 # Getting Started
 
 ## Quick Start (Local Development)
 1. `$ git clone https://github.com/rampatra/wedding-website.git` - clone this project to your computer
 2. `$ cd wedding-website` - go inside the project directory
-3. `$ npm install` - install dependencies
-4. `$ npm run build` - compile sass to css, minify js, etc.
-5. That's it, open `index.html` file on your browser by just double-clicking on it.
+3. `$ npm install` - install dependencies (195 packages, 0 vulnerabilities)
+4. `$ npm run build` - compile Sass to CSS, minify ES6+ JavaScript
+5. That's it, open `index.html` in your browser by double-clicking it.
+
+**Build Commands:**
+- `npm run build` - Build CSS and JS for production
+- `npm run watch` - Watch Sass files for changes during development
 
 ## API Key Configuration
 
@@ -58,8 +99,25 @@ The website uses API keys for Google Maps, Google Analytics, and Uber integratio
 
 **Note:** The API keys in this repository are examples. While they are safe to commit when properly restricted (see [SECURITY.md](SECURITY.md)), you should replace them with your own keys for production use.
 
+## Browser Support
+
+Modern browsers only (last 2 versions):
+- ✅ Chrome, Edge, Firefox, Safari
+- ✅ Mobile Safari (iOS), Chrome (Android)
+- ❌ Internet Explorer (no longer supported)
+
+All modern browser features used have 94%+ global support.
+
 # Documentation
-I have written a 
+
+Comprehensive documentation is available:
+
+- **[MODERNIZATION_PLAN.md](MODERNIZATION_PLAN.md)** - Complete modernization roadmap and progress
+- **[UPGRADE_GUIDE.md](UPGRADE_GUIDE.md)** - Detailed changelog and migration guide
+- **[SECURITY.md](SECURITY.md)** - Security best practices and API key configuration
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - GitHub Pages and alternative hosting guides
+
+I have also written a
 [blog post describing all the features of this wedding website](https://blog.rampatra.com/wedding-website) and how to
 customize each of them according to your needs.
 
